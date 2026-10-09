@@ -59,3 +59,12 @@ Sohbette paylaşılmış parola tekrar edilmez/kaydedilmez; değiştirilmesi ön
 `deploy/runtime-probe.sh` operatörün mevcut SSH oturumunda çalıştırabileceği bir envanterdir. Sudo kullanmaz, yapılandırma/secret okumaz, dosya yazmaz, servis başlatmaz ve paket kurmaz. Program varlığı; kalıcı servis çalıştırma, Python web yönlendirmesi veya üretim uygunluğu kanıtı değildir. Sunucunuzda bu script çalıştırılmadı; yalnız shell sözdizimi bu çalışma ortamında kontrol edildi.
 
 Operatör SSH terminaline script içeriğini yapıştırabilir veya web kökü dışında kendi home dizinine alıp `bash runtime-probe.sh` çalıştırabilir. Çıktı paylaşılabilir; parola, private key, env/site_config veya phpMyAdmin bağlantı sırları paylaşılmaz. Host key fingerprint'i yeni bağlantıda sağlayıcıyla doğrulanmalıdır.
+
+
+## Yeni ERP alan adı ve veritabanı görüntüsü
+
+Kullanıcı `nexterp.skysoftteknoloji.com.tr` subdomain'inin açıldığını bildirdi. Hedef site/alan adı hazırlık şablonunda bu değerle güncellendi; DNS/TLS bu oturumdan doğrulanmadı. Klasör görüntüsünde yalnız `default.php` görülüyor; içeriği okunmadı ve dosya değiştirilmedi. Bu dosya ERPNext kurulum kanıtı değildir.
+
+MySQL görüntüsü veritabanı/kullanıcı oluşturma formunu gösterir; başarılı oluşturma/listede görünme veya DB erişimi teyit edilmedi. phpMyAdmin adresi alınmıştır ancak oturum açılmamıştır. Parola/SSH/FTP/DB sırları bu dokümana, örnek dosyaya veya Git'e alınmaz; parola yeniden paylaşılmaz.
+
+Bu çalışma ortamının dış ağ kapsamı verilen IP/SSH/FTP ve Hostinger HTTPS hedeflerini içermez. Hiçbir ağ kısıtı dolanılmadı, başka servise parola aktarılmadı, bağlantı denendi ya da oturum açıldı iddiasında bulunulmadı. Mevcut site, klasör ve DB üzerinde değişiklik yapılmadı. Operatör tarafında güvenli erişimle çalışma veya bu hedeflere erişebilen yetkili dağıtım ortamı gerekir. PHP cloud ortamına ERPNext runtime hizmetleri mevcutmuş gibi yükleme yapılmaz.

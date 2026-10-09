@@ -9,8 +9,8 @@
   },
   "production": {
     "reported_existing": true,
-    "domain": "",
-    "site_name": "",
+    "domain": "nexterp.skysoftteknoloji.com.tr",
+    "site_name": "nexterp.skysoftteknoloji.com.tr",
     "operator_access_method": "",
     "operator_contact": "",
     "website_domain": "skysoftteknoloji.com.tr",
@@ -19,7 +19,11 @@
     "deployment_target": "php_cloud",
     "root_or_sudo_ssh_verified": false,
     "existing_website_must_be_preserved": true,
-    "user_confirmed_not_vps": true
+    "user_confirmed_not_vps": true,
+    "domain_reported_created": true,
+    "domain_dns_verified": false,
+    "tls_verified": false,
+    "webroot_relative": "public_html/nexterp"
   },
   "smtp": {
     "reported_ready": true,

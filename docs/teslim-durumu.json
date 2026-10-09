@@ -252,6 +252,16 @@
     "ssh_account_available": true,
     "ssh_port": 65002,
     "runtime_capabilities_tested": false,
-    "deployment_blocker": "Chosen ERPNext stack needs supported Python/Frappe, Redis and persistent services; PHP/MySQL/SSH evidence alone is insufficient"
+    "deployment_blocker": "Chosen ERPNext stack needs supported Python/Frappe, Redis and persistent services; PHP/MySQL/SSH evidence alone is insufficient",
+    "erp_subdomain": "nexterp.skysoftteknoloji.com.tr",
+    "subdomain_created_reported_by_user": true,
+    "dns_verified": false,
+    "tls_verified": false,
+    "folder_observation": "public_html/nexterp containing default.php",
+    "database_observation": "MySQL database/user creation form shown; successful creation not confirmed by screenshot",
+    "phpmyadmin_url_received": true,
+    "authenticated": false,
+    "database_changed": false,
+    "connection_blocker": "Current workspace outbound network scope does not include the supplied SSH/FTP/HTTPS targets"
   }
 }
