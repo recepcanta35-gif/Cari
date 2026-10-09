@@ -271,5 +271,15 @@
       "erp_http": "RemoteDisconnected: closed without HTTP response",
       "phpmyadmin_https": "TLS/SSL EOF before HTTP response"
     }
+  },
+  "architecture_proposal": {
+    "status": "proposed_not_applied",
+    "reason": "user asks about existing PHP/MySQL cloud compatibility",
+    "current_stack": "Frappe ERPNext v15",
+    "candidate_stack": "supported PHP ERP core with custom modules (Dolibarr to evaluate first)",
+    "alternative": "custom PHP framework only if no-from-scratch decision is revised",
+    "scope_preserved": "18 modules; no barcode or SMS",
+    "review_document": "docs/php-hosting-uyum-plani.md",
+    "new_php_acceptance_complete": false
   }
 }

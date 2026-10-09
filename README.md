@@ -76,3 +76,7 @@ env/bin/python /home/user/Cari/scripts/run_faz15_tests.py
 ## Lisans
 
 ERPNext **GPL-3.0**, Frappe Framework **MIT** lisanslıdır. `cari_custom`, ERPNext'ten uyarlanan sorgu kodu içerdiğinden GPL-3.0 olarak işaretlenmiş ve lisans metni eklenmiştir. `uyumsoft_integration` mevcut bağımsız iskeleti MIT olarak işaretlidir; tamamlanan entegrasyonun dağıtım şekli/lisans değerlendirmesi ayrıca yapılmalıdır. İç kullanım ve yazılımı üçüncü kişilere dağıtma koşulları aynı değildir; bu not hukukî görüş değildir.
+
+## Mevcut PHP cloud hosting için mimari seçenek
+
+Kullanıcının hosting uyumu sorusu için [PHP/MySQL uyum planı](docs/php-hosting-uyum-plani.md) hazırlandı. ERPNext PHP'ye dönüştürülmüş veya yeni PHP ERP kurulmuş değildir. Öncelikli aday, sıfırdan ERP/WordPress yaklaşımı yerine desteklenen bir PHP ERP çekirdeği + özel modüllerdir; Dolibarr için ayrı gap/kabul analizi yapılmalıdır. Platform kararı netleşmeden mevcut Frappe kodu silinmez veya PHP çalışıyor diye işaretlenmez.
