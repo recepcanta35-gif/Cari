@@ -1,0 +1,39 @@
+# Hostinger Ortamı — ERPNext Kurulum Uygunluk Kontrolü
+
+**Tarih:** 9 Ekim 2026
+**Kanıt:** Kullanıcının sağladığı FTP hesapları ve web dosya yöneticisi görüntüleri.
+
+## Görünenler ve görünmeyenler
+
+- Mevcut web sitesi alan adı: `skysoftteknoloji.com.tr`.
+- Web kök dizini `public_html`; ERP için `nexterp` adlı bir klasör oluşturulmuş.
+- Mevcut sitede WordPress dizinleri ve başka uygulama klasörleri var. Bunlar **silinmez, taşınmaz veya üzerine yazılmaz**. ERP çözümü WordPress/WooCommerce üzerine değiştirilmez.
+- Görüntüler FTP/web dosya erişimini gösterir; VPS, root/sudo SSH, Docker, sistem servisleri, Redis veya desteklenen veritabanı çalıştırma yetkisini **kanıtlamaz**.
+- Paketin yalnız web/cloud hosting mi yoksa ayrıca VPS de içerip içermediği teyit edilmelidir. Sağlayıcının adı tek başına uygunluk/uygunsuzluk kanıtı değildir.
+
+## Neden FTP klasörü yeterli değil?
+
+ERPNext bir PHP sitesi veya dosyaları `public_html` içine açınca çalışan statik paket değildir. Python/Frappe, MariaDB, Redis, web/worker/scheduler/websocket servisleri, dosya izinleri, kalıcı depolama, ters proxy ve TLS birlikte kurulmalıdır. FTP tek başına bu servisleri kurup yönetemez.
+
+- **Yalnız web/cloud hosting + FTP varsa:** bu klasöre ERPNext yüklenmez. Ayrı bir VPS/dedicated ortam veya Frappe uygulamalarını destekleyen yönetilen ERP barındırma gerekir.
+- **Ayrıca VPS varsa:** işletim sistemi, root/sudo erişimi, Docker/Compose, kaynaklar, güvenlik duvarı ve yedekleme teyit edilerek üretim adayı paket uygulanabilir.
+- **Yönetilen Frappe hosting varsa:** sağlayıcının özel uygulama, sürüm, worker, scheduler, PDF ve yedek desteği doğrulanır; Docker paketinin aynı şekilde kullanılacağı varsayılmaz.
+
+## Önerilen ayrım
+
+Mevcut site olduğu gibi kalır. ERP için örneğin `erp.skysoftteknoloji.com.tr` veya `nexterp.skysoftteknoloji.com.tr` ayrı sunucu/site olarak yapılandırılır. Subdomain DNS kaydı ancak gerçek hedef IP, kullanıcı tercihi, TLS ve erişim doğrulandıktan sonra değiştirilir.
+
+`skysoftteknoloji.com.tr/nexterp` alt dizininde çalışacağı varsayılmaz; Frappe site/asset/oturum ve proxy yolları için ayrı hostname tercih edilir. PHP yönlendirme dosyası, şifre dosyası veya ERP kaynak arşivi web köküne konmaz.
+
+## Güvenli erişim
+
+- Sohbette paylaşılan parola değiştirilmelidir. Parola burada tekrar edilmez; Git'e, env örneğine, loga veya dokümana kaydedilmez.
+- Sunucu yönetimi için tercihen sınırlı operatör hesabı, SSH anahtarı ve doğrulanmış host fingerprint kullanılır. Web FTP parolası root/sudo SSH veya VPS erişimi sayılmaz.
+- Parola/SSH private key/API anahtarı sohbete yazılmaz. Operatör/sunucu secret yönetimiyle sağlanır.
+- Hostinger paneli bu oturumda doğrudan yönetilebilen bir connector değildir. Mevcut bağlantı yetenekleriyle FTP oturumu açılmadı, dosya yüklenmedi ve DNS/hosting üzerinde değişiklik yapılmadı.
+
+## Sonraki teyit
+
+Hostinger **VPS → Genel Bakış / işletim sistemi** ekranının veya **Hosting Planı** ekranının, parolalar ve anahtarlar görünmeden paylaşılması yeterlidir. Amaç yalnız ortam türünü ve yetkilerini belirlemektir; geliştirme fazlarının onayı tekrar istenmez.
+
+Uygun çalışma ortamı doğrulanmadan üretim teslim kapısı **NO-GO** kalır. Sunucu seçimi/ücretli kaynak oluşturma veya mevcut siteyi değiştirme otomatik yapılmaz.

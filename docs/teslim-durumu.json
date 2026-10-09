@@ -232,8 +232,21 @@
   },
   "user_input_status": {
     "legal_company": "will_be_supplied_later",
-    "production_server_and_domain": "existing_reported_not_connected_or_verified",
+    "production_server_and_domain": "hostinger_web_ftp_evidence_received_vps_admin_runtime_not_verified",
     "smtp": "ready_reported_not_configured_or_verified",
     "uyumsoft": "product_determined_api_access_pending_name_version_still_required"
+  },
+  "hosting_evidence": {
+    "provider": "Hostinger",
+    "observed": "FTP account panel and public_html file manager",
+    "website_domain": "skysoftteknoloji.com.tr",
+    "proposed_upload_folder": "public_html/nexterp",
+    "ssh_root_or_sudo_verified": false,
+    "docker_runtime_verified": false,
+    "connection_attempted": false,
+    "files_uploaded": false,
+    "existing_website_must_be_preserved": true,
+    "credentials_recorded": false,
+    "decision": "FTP_ONLY_EVIDENCE_NOT_DEPLOYABLE_AS_ERPNEXT"
   }
 }

@@ -12,7 +12,13 @@
     "domain": "",
     "site_name": "",
     "operator_access_method": "",
-    "operator_contact": ""
+    "operator_contact": "",
+    "website_domain": "skysoftteknoloji.com.tr",
+    "hosting_provider": "Hostinger",
+    "observed_access": "FTP / web file manager",
+    "deployment_target": "unconfirmed",
+    "root_or_sudo_ssh_verified": false,
+    "existing_website_must_be_preserved": true
   },
   "smtp": {
     "reported_ready": true,
