@@ -116,8 +116,25 @@ bench start   # web: 0.0.0.0:8000, socketio: 0.0.0.0:9000
 `bench --site cari.local console` içinde `cari_custom.setup_turkey.run()` çalıştırıldı (idempotent — tekrar çalıştırılabilir). Script: `apps/cari_custom/cari_custom/setup_turkey.py`.
 
 - **Şirket:** Cari A.Ş. (CARI, Turkey, TRY) + jenerik chart of accounts (82 hesap) + varsayılan depolar (Stores/WIP/Finished Goods/Transit)
-- **KDV:** KDV %20 (varsayılan) / %10 / %1 — Sales Taxes and Charges Template + Item Tax Template (KDV hesabı: company setup'ın "VAT 18% - CARI" — tekdüzen plana göre düzenlenecek)
+- **KDV:** KDV %20 (varsayılan) / %10 / %1 — Sales/Purchase Taxes and Charges Template + Item Tax Template (KDV hesabı: company setup'ın "VAT 18% - CARI" — tekdüzen plana göre düzenlenecek)
 - **Tanımlar:** UOM (Nos, Kg, m, Koli), Item Group (Genel), Customer Group (Bireysel/Kurumsal), Supplier Group (Yerli Tedarikçi), Territory (Türkiye + 7 bölge), Payment Terms (Peşin/30/60 gün), Mode of Payment (Nakit, Kredi Kartı, Havale/EFT, Çek, Senet), Banka - TRY hesabı, Saha Deposu
 - **Roller (modül 16):** "Saha Personeli" — Sales Order/Quotation/Delivery Note CRUD; Customer/Item/Warehouse/Employee/Vehicle read; Stock Assignment + Daily Assignment CRUD (Custom DocPerm). Diğer roller: ERPNext hazır rolleri (Sales/Purchase/Accounts/Stock/HR User+Manager, System Manager).
 - **Hatırlatma (modül 15):** Notification "Tahsilat Vadesi Yaklaşıyor" — Sales Invoice due_date, 7 gün önce, Email kanalı, Accounts Manager. SMTP (Email Account) ayarlanınca gönderim başlar.
-- **Notlar:** developer_mode açık (site_config.json — DocType permission düzenleme için); v15'te Email Alert doctype yok → Notification kullanıldı; PDF (weasyprint/wkhtmltopdf) bu ortamda kurulamıyor (libpango/libXrender eksik) — production sunucuda apt ile kurulacak.
+- **Notlar:** developer_mode açık (site_config.json — demo seed onayı için); izinler standart DocType kaydedilmeden Custom DocPerm API ile yönetilir; v15'te Email Alert doctype yok → Notification kullanıldı; PDF (weasyprint/wkhtmltopdf) bu ortamda kurulamıyor (libpango/libXrender eksik) — production sunucuda apt ile kurulacak.
+
+
+## 9. Faz 1.5 — Demo ve uçtan uca kabul (TAMAMLANDI — 9 Ekim 2026)
+
+Ana site `cari.local`: **199 kabul kontrolü**, **13/13 regresyon testi**. Sıfırdan kurulan `cari-faz15-test.local`: **201 kontrol**, **13/13 test**. Varsayılan site `cari.local` olarak kaldı. Kayıtlar ve komutlar: [faz-1-5-test-sonuclari.md](faz-1-5-test-sonuclari.md).
+
+- Seed: `cari_custom.sample_data.run(allow_demo=True)`; tekrar çalıştırmada ürün/belge/defter mükerrerliği engellenir. Belge kimlikleri site private/files altında tutulur.
+- Ayrı doğrulama: `cari_custom.sample_validation.verify()`; veri yaratmadan stok, belge bağlantıları, etkin KDV, muhasebe ve cari bakiyeler karşılaştırılır.
+- Sunucu CLI `Stock Entry` oluştururken `stock_entry_type` yanında **purpose** de açıkça atanmalıdır. Material Receipt sadece hedef depo gerektirir; önceki source-depo hatası, server-side purpose default'unun Material Issue kalmasından kaynaklanmıştır. Demo girişi Purchase Receipt ile, saha transferi Material Transfer ile yapılır.
+- Sistem dili `tr`, saat dilimi `Europe/Istanbul`, Global Defaults country Turkey / currency TRY / company Cari A.Ş. oldu. Geçen kabulün ardından demo kurulum bayrakları standart setup-wizard helper'ıyla tamamlandı; Desk açılır.
+- KDV şablonlarının çift `- CARI` suffix problemi tekrar çalıştırılabilir lookup ile düzeltildi; eski şablonlar/finans kayıtları silinmedi. Yeni şablonlara ERPNext kısaltmayı kendisi ekler. Alış KDV şablonları da kuruldu.
+- Permission ekleme mevcut satırın create/write haklarını değiştirmediğinden `update_permission_property` kullanılır; custom izinlerin System Manager erişimini gölgelemesi düzeltildi.
+- Zimmet/görev validation'larında eksik `frappe` import'u ve tarih tipi karşılaştırmaları düzeltildi. Zimmette `stok_hareketi` bağlantısı ve her iki DocType'ta change tracking/adlandırma eklendi.
+- Tahsilat hatırlatma koşulu yalnız onaylı ve açık bakiyeli faturalarla sınırlandı. SMTP gönderimi hâlâ kurulmadı/test edilmedi.
+- PostgreSQL adaptörleri **yalnız 10 hedefli ERPNext fonksiyonunu**, request/job/migrate veya CLI test girişinde sarar; genel get_all/get_list/sql değiştirilmez. MariaDB çekirdek fonksiyona yönlenir, v16+ sarılmaz. Num2words sayısal fallback'i kaldırıldı; kök hata boş dil ayarıydı.
+
+**Üretim uyarısı:** Bu testler v15/PostgreSQL'i genel olarak üretim destekli hale getirmez. Tercih v15/MariaDB + desteklenen resmi kurulumdur. Docker, barındırma ve güvenlik/toparlama planı üretim hazırlığında değerlendirilmelidir; test seed'i üretimde çalıştırılmamalıdır.

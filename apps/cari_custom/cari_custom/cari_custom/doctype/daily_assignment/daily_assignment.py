@@ -1,13 +1,15 @@
+import frappe
 from frappe.model.document import Document
+from frappe.utils import get_datetime
 
 
 class DailyAssignment(Document):
-	"""Gunluk gorevlendirme (kapsam modulu 10).
-
-	ERPNext Delivery Trip sevkiyat rotalarina yoneliktir; bu DocType
-	saha personelinin gunluk gorev planini (arac, bolge, musteri) tutar.
-	"""
+	"""Saha personelinin günlük görev planı (araç, bölge, müşteri)."""
 
 	def validate(self):
-		if self.bitis_saati and self.baslangic_saati and self.bitis_saati < self.baslangic_saati:
+		if (
+			self.bitis_saati
+			and self.baslangic_saati
+			and get_datetime(self.bitis_saati) < get_datetime(self.baslangic_saati)
+		):
 			frappe.throw("Bitiş saati başlangıç saatinden önce olamaz")

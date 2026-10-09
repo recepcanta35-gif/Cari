@@ -68,7 +68,9 @@ def _create_company():
 	c.default_currency = "TRY"
 	c.insert(ignore_permissions=True)
 	frappe.db.commit()
-	frappe.logger("cari_custom").info(f"Company oluşturuldu: {COMPANY} (chart of accounts + varsayılan tanımlar otomatik)")
+	frappe.logger("cari_custom").info(
+		f"Company oluşturuldu: {COMPANY} (chart of accounts + varsayılan tanımlar otomatik)"
+	)
 	return c
 
 
@@ -103,28 +105,35 @@ def _vat_account(company):
 
 
 def _setup_taxes(company):
-	"""KDV %1/%10/%20 — Satış şablonu + ürün vergi şablonu."""
+	"""KDV %1/%10/%20 — satış, alış ve ürün vergi şablonları."""
 	vat = _vat_account(company)
 	for rate, title in [(20, "KDV %20"), (10, "KDV %10"), (1, "KDV %1")]:
-		key = f"{title} - {ABBR}"
-		if not _exists("Sales Taxes and Charges Template", key):
-			t = frappe.new_doc("Sales Taxes and Charges Template")
-			t.title = key
-			t.company = company.name
-			t.is_default = 1 if rate == 20 else 0
-			t.append(
-				"taxes",
-				{
-					"charge_type": "On Net Total",
-					"account_head": vat,
-					"rate": rate,
-					"description": title,
-				},
-			)
-			t.insert(ignore_permissions=True)
-		if not _exists("Item Tax Template", key):
+		legacy_title = f"{title} - {ABBR}"
+		for doctype in ["Sales Taxes and Charges Template", "Purchase Taxes and Charges Template"]:
+			if not frappe.db.exists(
+				doctype, {"company": company.name, "title": ["in", [title, legacy_title]]}
+			):
+				template = frappe.new_doc(doctype)
+				template.title = title  # ERPNext şirket kısaltmasını kendisi ekler.
+				template.company = company.name
+				template.is_default = 1 if rate == 20 else 0
+				template.append(
+					"taxes",
+					{
+						"charge_type": "On Net Total",
+						"account_head": vat,
+						"rate": rate,
+						"description": title,
+						"category": "Total",
+						"add_deduct_tax": "Add",
+					},
+				)
+				template.insert(ignore_permissions=True)
+		if not frappe.db.exists(
+			"Item Tax Template", {"company": company.name, "title": ["in", [title, legacy_title]]}
+		):
 			it = frappe.new_doc("Item Tax Template")
-			it.title = key
+			it.title = title
 			it.company = company.name
 			it.append("taxes", {"tax_type": vat, "tax_rate": rate})
 			it.insert(ignore_permissions=True)
@@ -164,6 +173,7 @@ def _setup_master_data(company):
 	if not _exists("Territory", "Türkiye"):
 		d = frappe.new_doc("Territory")
 		d.territory_name = "Türkiye"
+		d.is_group = 1
 		d.parent_territory = "All Territories"
 		d.insert(ignore_permissions=True)
 	for t in ["Marmara", "İç Anadolu", "Ege", "Akdeniz", "Karadeniz", "Doğu Anadolu", "Güneydoğu Anadolu"]:
@@ -242,40 +252,39 @@ def _setup_roles():
 
 	# Saha Personeli — çekirdek doctype erişimleri
 	perms = {
-		"Sales Order": dict(read=1, write=1, create=1),
-		"Quotation": dict(read=1, write=1, create=1),
-		"Delivery Note": dict(read=1, write=1, create=1),
-		"Customer": dict(read=1),
-		"Item": dict(read=1),
-		"Warehouse": dict(read=1),
-		"Employee": dict(read=1),
-		"Vehicle": dict(read=1),
+		"Sales Order": {"read": 1, "write": 1, "create": 1},
+		"Quotation": {"read": 1, "write": 1, "create": 1},
+		"Delivery Note": {"read": 1, "write": 1, "create": 1},
+		"Customer": {"read": 1},
+		"Item": {"read": 1},
+		"Warehouse": {"read": 1},
+		"Employee": {"read": 1},
+		"Vehicle": {"read": 1},
 	}
 	for dt, p in perms.items():
-		for ptype in ("read", "write", "create"):
-			if p.get(ptype):
-				frappe.permissions.add_permission(dt, "Saha Personeli", 0, ptype)
-		frappe.clear_cache(doctype=dt)
+		_grant_permissions(dt, "Saha Personeli", p)
 
-	# Saha Personeli — custom doctype'ler (zimmet + görevlendirme)
+	# Custom izinler standart izinleri gölgeler; System Manager erişimi korunur.
 	for dt in ["Stock Assignment", "Daily Assignment"]:
-		if not frappe.db.exists(
-			"Custom DocPerm", {"parent": dt, "role": "Saha Personeli"}
-		):
-			cd = frappe.new_doc("Custom DocPerm")
-			cd.parent = dt
-			cd.role = "Saha Personeli"
-			cd.read = 1
-			cd.write = 1
-			cd.create = 1
-			cd.delete = 1
-			cd.submit = 0
-			cd.cancel = 0
-			cd.export = 1
-			cd.print = 1
-			cd.email = 1
-			cd.share = 1
-			cd.insert(ignore_permissions=True)
+		_grant_permissions(
+			dt, "System Manager", {"read": 1, "write": 1, "create": 1, "delete": 1, "print": 1}
+		)
+		_grant_permissions(
+			dt, "Saha Personeli", {"read": 1, "write": 1, "create": 1, "delete": 1, "print": 1}
+		)
+
+
+def _grant_permissions(doctype, role, permissions):
+	from frappe.permissions import add_permission, update_permission_property
+
+	if not frappe.db.exists(
+		"Custom DocPerm", {"parent": doctype, "role": role, "permlevel": 0, "if_owner": 0}
+	):
+		add_permission(doctype, role, 0, "read")
+	# add_permission mevcut kuralı güncellemez; haklar ayrı ayrı uygulanır.
+	for right, value in permissions.items():
+		update_permission_property(doctype, role, 0, right, value)
+	frappe.clear_cache(doctype=doctype)
 
 
 def _setup_notifications():
@@ -290,6 +299,7 @@ def _setup_notifications():
 		d.event = "Days Before"
 		d.date_changed = "due_date"
 		d.days_in_advance = 7
+		d.condition = "doc.docstatus == 1 and doc.outstanding_amount > 0"
 		d.channel = "Email"
 		d.enabled = 1
 		d.append("recipients", {"receiver_by_role": "Accounts Manager"})
@@ -299,12 +309,36 @@ def _setup_notifications():
 			"{{ doc.name }} numaralı faturanın vadesi 7 gün içinde doluyor."
 		)
 		d.insert(ignore_permissions=True)
+	else:
+		d = frappe.get_doc("Notification", "Tahsilat Vadesi Yaklaşıyor")
+		expected = "doc.docstatus == 1 and doc.outstanding_amount > 0"
+		if d.condition != expected:
+			d.condition = expected
+			d.save(ignore_permissions=True)
+
+
+def _setup_system_defaults():
+	settings = frappe.get_doc("System Settings")
+	settings.language = "tr"
+	settings.time_zone = "Europe/Istanbul"
+	settings.save(ignore_permissions=True)
+	defaults = frappe.get_doc("Global Defaults")
+	defaults.default_company = COMPANY
+	defaults.country = "Turkey"
+	defaults.default_currency = "TRY"
+	defaults.save(ignore_permissions=True)
+	frappe.defaults.set_global_default("currency", "TRY")
+	frappe.local.lang = "tr"
 
 
 def run():
+	from cari_custom.compat_patches import install
+
+	install()
 	_ensure_warehouse_types()
 	_ensure_root_groups()
 	company = _create_company()
+	_setup_system_defaults()
 	_setup_taxes(company)
 	_setup_master_data(company)
 	_setup_roles()
