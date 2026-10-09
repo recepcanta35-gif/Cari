@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "creation": "2026-10-09 08:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["naming_series", "tarih", "personel", "arac", "bolge", "musteri", "gorev", "baslangic_saati", "bitis_saati", "durum"],
+ "fields": [
+  {"fieldname": "naming_series", "fieldtype": "Select", "label": "Seri", "options": "DA-.#####", "default": "DA-.#####"},
+  {"fieldname": "tarih", "fieldtype": "Date", "label": "Tarih", "reqd": 1, "default": "Today"},
+  {"fieldname": "personel", "fieldtype": "Link", "label": "Personel", "options": "Employee", "reqd": 1},
+  {"fieldname": "arac", "fieldtype": "Link", "label": "Araç", "options": "Vehicle"},
+  {"fieldname": "bolge", "fieldtype": "Data", "label": "Bölge/Rota"},
+  {"fieldname": "musteri", "fieldtype": "Link", "label": "Müşteri", "options": "Customer"},
+  {"fieldname": "gorev", "fieldtype": "Small Text", "label": "Görev"},
+  {"fieldname": "baslangic_saati", "fieldtype": "Datetime", "label": "Başlangıç Saati"},
+  {"fieldname": "bitis_saati", "fieldtype": "Datetime", "label": "Bitiş Saati"},
+  {"fieldname": "durum", "fieldtype": "Select", "label": "Durum", "options": "Planlandı\nSahada\nTamamlandı\nİptal", "default": "Planlandı"}
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-09 08:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cari Custom",
+ "name": "Daily Assignment",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [{"create": 1, "delete": 1, "email": 1, "print": 1, "read": 1, "role": "System Manager", "share": 1, "write": 1}],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}

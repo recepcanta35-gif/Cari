@@ -1,0 +1,18 @@
+# Frappe bench çalışma dizini (büyük, yerel kurulum)
+/frappe-bench/
+
+# PostgreSQL veri dizini (pgserver)
+/pgdata/
+
+# Loglar ve geçici dosyalar
+*.log
+*.pyc
+__pycache__/
+
+# Python sanal ortamları (varsa)
+/venv/
+/.venv/
+.env
+
+# Node
+/node_modules/

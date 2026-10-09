@@ -1,0 +1,17 @@
+[project]
+name = "cari_custom"
+authors = [
+    {name = "Cari", email = "info@cari.local"},
+]
+dynamic = ["version"]
+description = "Personel stok zimmeti, gunluk gorevlendirme ve kargo takibi ozel gelistirmeleri"
+requires-python = ">=3.10"
+dependencies = [
+    "frappe~=15.0.0",
+]
+
+[build-system]
+requires = ["flit_core >=3.4,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.bench.dev-dependencies]

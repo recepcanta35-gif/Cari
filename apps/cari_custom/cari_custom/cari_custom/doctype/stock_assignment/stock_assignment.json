@@ -1,0 +1,31 @@
+{
+ "actions": [],
+ "creation": "2026-10-09 08:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": ["naming_series", "personel", "depo", "urun", "zimmet_miktar", "birim", "atama_tarihi", "iade_tarihi", "durum", "aciklama"],
+ "fields": [
+  {"fieldname": "naming_series", "fieldtype": "Select", "label": "Seri", "options": "SA-.#####", "default": "SA-.#####"},
+  {"fieldname": "personel", "fieldtype": "Link", "label": "Personel", "options": "Employee", "reqd": 1},
+  {"fieldname": "depo", "fieldtype": "Link", "label": "Depo", "options": "Warehouse", "reqd": 1},
+  {"fieldname": "urun", "fieldtype": "Link", "label": "Ürün", "options": "Item", "reqd": 1},
+  {"fieldname": "zimmet_miktar", "fieldtype": "Float", "label": "Zimmet Miktarı", "reqd": 1},
+  {"fieldname": "birim", "fieldtype": "Link", "label": "Birim", "options": "UOM"},
+  {"fieldname": "atama_tarihi", "fieldtype": "Date", "label": "Atama Tarihi", "default": "Today"},
+  {"fieldname": "iade_tarihi", "fieldtype": "Date", "label": "İade Tarihi"},
+  {"fieldname": "durum", "fieldtype": "Select", "label": "Durum", "options": "Aktif\nKısmi İade\nİade Edildi", "default": "Aktif"},
+  {"fieldname": "aciklama", "fieldtype": "Text", "label": "Açıklama"}
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-09 08:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cari Custom",
+ "name": "Stock Assignment",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [{"create": 1, "delete": 1, "email": 1, "print": 1, "read": 1, "role": "System Manager", "share": 1, "write": 1}],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": []
+}
