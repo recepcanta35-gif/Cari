@@ -52,3 +52,10 @@ SSH bir erişim yöntemidir; Python web trafiği yönlendirmesi, Redis, kalıcı
 ERP'nin **yalnız bu PHP cloud hesabında** çalışması kesin şart haline gelirse, ERPNext yerine PHP uyumlu farklı bir uygulama/mimari gerekir. Bu önceki ERPNext kararı ve geliştirme kapsamı değişikliğidir; sessizce başka sisteme geçilmez. Mevcut ERPNext geliştirmenin onayı ve bağımsız modül işleri korunur.
 
 Sohbette paylaşılmış parola tekrar edilmez/kaydedilmez; değiştirilmesi önerilir. Bu not veya ön kontrol gerçek hostingte yapılmış servis testi, canlı kurulum ya da anahtar teslim kabulü değildir.
+
+
+## Salt-okunur runtime envanteri
+
+`deploy/runtime-probe.sh` operatörün mevcut SSH oturumunda çalıştırabileceği bir envanterdir. Sudo kullanmaz, yapılandırma/secret okumaz, dosya yazmaz, servis başlatmaz ve paket kurmaz. Program varlığı; kalıcı servis çalıştırma, Python web yönlendirmesi veya üretim uygunluğu kanıtı değildir. Sunucunuzda bu script çalıştırılmadı; yalnız shell sözdizimi bu çalışma ortamında kontrol edildi.
+
+Operatör SSH terminaline script içeriğini yapıştırabilir veya web kökü dışında kendi home dizinine alıp `bash runtime-probe.sh` çalıştırabilir. Çıktı paylaşılabilir; parola, private key, env/site_config veya phpMyAdmin bağlantı sırları paylaşılmaz. Host key fingerprint'i yeni bağlantıda sağlayıcıyla doğrulanmalıdır.
