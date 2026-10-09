@@ -21,6 +21,9 @@ def main():
 
 	frappe.init(site=args.site, sites_path=".")
 	frappe.connect()
+	from cari_custom.security import install_query_guard
+
+	install_query_guard()
 	try:
 		if not frappe.conf.get("developer_mode"):
 			parser.error("Test verisi yalnız demo/developer sitesinde kullanılabilir")

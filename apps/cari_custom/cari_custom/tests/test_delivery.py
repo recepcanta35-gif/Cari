@@ -12,6 +12,9 @@ from cari_custom.sample_data import COMPANY, CUSTOMER, SAHA, STORES, VEHICLE
 
 class DeliveryTests(unittest.TestCase):
 	def setUp(self):
+		from cari_custom.security import install_query_guard
+
+		install_query_guard()
 		frappe.set_user("Administrator")
 		frappe.flags.mute_emails = True
 		frappe.local.lang = "tr"
