@@ -1,0 +1,145 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Shipment",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "autoname": "hash",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "delivery_note",
+   "fieldtype": "Link",
+   "label": "İrsaliye",
+   "reqd": 1,
+   "options": "Delivery Note"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "read_only": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Müşteri",
+   "read_only": 1,
+   "options": "Customer"
+  },
+  {
+   "fieldname": "delivery_mode",
+   "fieldtype": "Select",
+   "label": "Sevk Türü",
+   "reqd": 1,
+   "default": "Kargo",
+   "options": "Kargo\nKendi Araçlarımız"
+  },
+  {
+   "fieldname": "vehicle",
+   "fieldtype": "Link",
+   "label": "Araç",
+   "options": "Vehicle"
+  },
+  {
+   "fieldname": "carrier",
+   "fieldtype": "Data",
+   "label": "Kargo Firması",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "tracking_number",
+   "fieldtype": "Data",
+   "label": "Takip Numarası",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Sevk Durumu",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "default": "Hazırlanıyor",
+   "options": "Hazırlanıyor\nSevk Edildi\nTeslim Edildi\nTeslim Sorunu\nİade\nİptal"
+  },
+  {
+   "fieldname": "dispatched_at",
+   "fieldtype": "Datetime",
+   "label": "Sevk Zamanı",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "delivered_at",
+   "fieldtype": "Datetime",
+   "label": "Teslim Zamanı",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "delivery_proof",
+   "fieldtype": "Link",
+   "label": "Teslim Kanıtı",
+   "allow_on_submit": 1,
+   "options": "File"
+  },
+  {
+   "fieldname": "note",
+   "fieldtype": "Small Text",
+   "label": "Durum Notu",
+   "allow_on_submit": 1
+  }
+ ],
+ "field_order": [
+  "delivery_note",
+  "company",
+  "customer",
+  "delivery_mode",
+  "vehicle",
+  "carrier",
+  "tracking_number",
+  "status",
+  "dispatched_at",
+  "delivered_at",
+  "delivery_proof",
+  "note"
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Yönetici",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Depo Personeli",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "links": [],
+ "actions": [],
+ "states": []
+}

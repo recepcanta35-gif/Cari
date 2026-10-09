@@ -1,0 +1,144 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Service Record",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "autoname": "hash",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "reqd": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Müşteri",
+   "reqd": 1,
+   "options": "Customer"
+  },
+  {
+   "fieldname": "item",
+   "fieldtype": "Link",
+   "label": "Ürün",
+   "reqd": 1,
+   "options": "Item"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Link",
+   "label": "Seri Numarası",
+   "options": "Serial No"
+  },
+  {
+   "fieldname": "warranty_claim",
+   "fieldtype": "Link",
+   "label": "Garanti Talebi",
+   "options": "Warranty Claim"
+  },
+  {
+   "fieldname": "service_type",
+   "fieldtype": "Select",
+   "label": "Servis Türü",
+   "reqd": 1,
+   "default": "Ücretli",
+   "options": "Garanti\nÜcretli"
+  },
+  {
+   "fieldname": "opened_on",
+   "fieldtype": "Date",
+   "label": "Açılış Tarihi",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "warranty_expires",
+   "fieldtype": "Date",
+   "label": "Garanti Bitişi",
+   "read_only": 1
+  },
+  {
+   "fieldname": "complaint",
+   "fieldtype": "Small Text",
+   "label": "Arıza/Şikayet",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Durum",
+   "default": "Açık",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "options": "Açık\nİşlemde\nTamamlandı\nİptal"
+  },
+  {
+   "fieldname": "result",
+   "fieldtype": "Text",
+   "label": "Servis Sonucu",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "completed_on",
+   "fieldtype": "Date",
+   "label": "Tamamlanma Tarihi",
+   "read_only": 1,
+   "allow_on_submit": 1
+  }
+ ],
+ "field_order": [
+  "company",
+  "customer",
+  "item",
+  "serial_no",
+  "warranty_claim",
+  "service_type",
+  "opened_on",
+  "warranty_expires",
+  "complaint",
+  "status",
+  "result",
+  "completed_on"
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Yönetici",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Servis",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "links": [],
+ "actions": [],
+ "states": []
+}

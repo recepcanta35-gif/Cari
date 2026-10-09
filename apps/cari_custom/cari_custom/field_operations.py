@@ -178,6 +178,9 @@ class StockAssignment(Document):
 		if self.docstatus == 0:
 			self.kalan_miktar = flt(self.zimmet_miktar)
 
+	def before_update_after_submit(self):
+		frappe.throw("Onaylı zimmet elle değiştirilemez; işlem belgelerini kullanın", frappe.PermissionError)
+
 	def before_submit(self):
 		require_operations_manager()
 		if not self.kaynak_depo:
@@ -244,6 +247,9 @@ class StockAssignmentReturn(Document):
 				raise RuleViolation("İade miktarı kalan zimmeti aşıyor")
 		except RuleViolation as exc:
 			frappe.throw(str(exc))
+
+	def before_update_after_submit(self):
+		frappe.throw("Onaylı zimmet iadesi elle değiştirilemez", frappe.PermissionError)
 
 	def before_submit(self):
 		require_operations_manager()
@@ -359,6 +365,11 @@ class DailyAssignment(Document):
 			and not getattr(frappe.local, "cari_internal_transition", False)
 		):
 			frappe.throw("Görev durumunu başlat/bitir işlemleriyle değiştirin", frappe.PermissionError)
+
+	def before_update_after_submit(self):
+		if not getattr(frappe.local, "cari_internal_transition", False):
+			frappe.throw("Onaylı görev yalnız başlat/bitir işlemleriyle değişir", frappe.PermissionError)
+		self.validate()
 
 	def before_submit(self):
 		require_operations_manager()

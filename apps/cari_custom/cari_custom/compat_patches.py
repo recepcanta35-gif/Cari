@@ -17,14 +17,14 @@ def _postgres_site():
 	return getattr(frappe.local, "conf", {}).get("db_type") == "postgres"
 
 
-def _wrap(target, name, replacement, aliases=()):
+def _wrap(target, name, replacement, aliases=(), *, always=False):
 	original = getattr(target, name)
 	if getattr(original, "_cari_pg_adapter", False):
 		return
 
 	@wraps(original)
 	def adapted(*args, **kwargs):
-		if _postgres_site():
+		if always or _postgres_site():
 			return replacement(*args, **kwargs)
 		return original(*args, **kwargs)
 
@@ -83,4 +83,9 @@ def install(**_kwargs):
 		"get_matched_payment_request_of_references",
 		queries.get_matched_payment_request_of_references,
 	)
-	_wrap(stock_ledger, "get_previous_sle_of_current_voucher", queries.get_previous_sle_of_current_voucher)
+	_wrap(
+		stock_ledger,
+		"get_previous_sle_of_current_voucher",
+		queries.get_previous_sle_of_current_voucher,
+		always=True,
+	)

@@ -69,3 +69,5 @@ permission_query_conditions = {
 	"Cari Service Record": "cari_custom.permission_queries.cari_service_record",
 	"Warranty Claim": "cari_custom.permission_queries.warranty_claim",
 }
+
+doctype_js = {name: "public/js/operations.js" for name in ["Stock Assignment", "Daily Assignment", "Cari Shipment", "Cari Service Record"]}

@@ -1,0 +1,10 @@
+{
+ "doctype": "Page",
+ "name": "cari-merkez",
+ "page_name": "cari-merkez",
+ "title": "Cari İş Merkezi",
+ "module": "Cari Custom",
+ "standard": "Yes",
+ "system_page": 0,
+ "roles": [{"role":"System Manager"},{"role":"Cari Kapsamlı"},{"role":"Saha Personeli"},{"role":"Depo Personeli"},{"role":"Cari Kullanıcı Yöneticisi"}]
+}

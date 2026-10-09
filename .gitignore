@@ -16,3 +16,12 @@ __pycache__/
 
 # Node
 /node_modules/
+
+# Delivery secrets, test evidence and external-storage backups
+.env.*
+!deploy/.env.example
+/secrets/
+/artifacts/
+/backups/
+*.sql
+*.sql.gz
