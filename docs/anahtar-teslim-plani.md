@@ -85,3 +85,16 @@ Parola/secret değerlerini bu belgeye veya sohbete yazmayın. Sırların güvenl
 - Test kanıtı olmadan tamamlanma işaretlenmez; eski PostgreSQL demo raporları tarihi kanıt olarak saklanır, yeni MariaDB kabulü yerine geçmez.
 - Teslim paketi sürümlenecek; release/checklist, lisans metinleri, veri sözlüğü, kullanıcı ve operatör kılavuzları, bilinen kısıtlar ve geri dönüş planı aynı kaynak deposunda tutulur.
 - Kullanıcı tüm fazları onayladığı için geliştirme sırasında yeniden “devam edelim mi?” sorulmaz; yalnız gerçekten eksik dış bilgi veya iş kuralı çatışması için soru sorulur.
+
+
+## İlk geliştirme paketi — kanıt (9 Ekim 2026)
+
+Kaynak `071ca93254daf2c6dd82fd89bfce74ae93a2771c` için [MariaDB CI 37937955043](https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043) başarılı:
+
+- 37 yerel/CI birim ve şema/konfigürasyon kontrolü
+- Sıfırdan resmî MariaDB kurulumunda 201 demo kabul kontrolü ve 13 temel regresyon
+- 18 ek gerçek DB kabul testi: scope/boş kapsam/paylaşım ve doğrudan ID izolasyonu, depo maliyet gizleme, yetkisiz finans oluşturma engeli, gerçek zimmet transferi, kısmi/tam iade/iptal, fazla iade ve bağlı transfer iptal engeli, görev çakışması/geçişleri, pasif güvenli hesap ve rol yükseltme engeli, çek tahsilatının bankadan ayrılması, sevkiyat/servis, portal sunucu fiyatı/idempotency ve miktar dashboard'u
+
+Kapsamlı iş merkezi, sevkiyat/servis ve müşteri portalı ekranları kaynakta eklendi. Ancak tam tarayıcı/mobil/yük/güvenlik, serialized/partili ürünler, eşzamanlı yarış ve bütün iade/kur/kısmi sevk varyasyonlarının son kabulü henüz yapılmadı. **Faz/modül final_acceptance alanları bu yüzden false kalır.**
+
+Önemli düzeltmeler: controller re-export'ları lint ile silinmemeli; şema–sınıf testi eklendi. ERPNext v15 stok zaman tie-breaker'ı her iki DB'de düzeltilmiştir. Frappe paylaşım OR koşulu Cari kapsamını aşamasın diye dış AND koruması request/job ve CLI test girişinde uygulanır. Submit sonrası durum değişiklikleri yalnız sunucu işlem uçlarına bırakılır.

@@ -38,7 +38,7 @@ bench start          # geliştirme sunucusu (0.0.0.0:8000)
 
 Kurulum detayları ve sandbox workaround'ları: [docs/erpnext-kurulum-rehberi.md](docs/erpnext-kurulum-rehberi.md)
 
-## Durum (9 Ekim 2026)
+## Tarihî demo durumu (9 Ekim 2026)
 
 - ✅ **Faz 0–1 tamamlandı:** ERPNext v15 + PostgreSQL + site `cari.local` yayında (0.0.0.0:8000)
 - ✅ **Faz 1 — Türkiye yapılandırması:** şirket (Cari A.Ş., TRY), KDV %1/%10/%20, temel tanımlar (birim, grup, bölge, vade, ödeme tipleri, saha deposu), rol matrisi (Saha Personeli), e-posta hatırlatması
@@ -50,6 +50,17 @@ Kurulum detayları ve sandbox workaround'ları: [docs/erpnext-kurulum-rehberi.md
 - Barkod ve SMS modülü yoktur; ürün seçimi ad, ürün kodu, kategori ve fotoğraf üzerinden.
 - Uyumsoft bağlantısı; ürün, sürüm ve erişim yetkilerine bağlıdır.
 - Online satış kapsamda; geliştirme sırası çekirdek ticari modüllerden sonra.
+
+## Anahtar teslim programı — kullanıcı bütün fazları onayladı
+
+- [Tam teslim planı ve 18 modül kabulü](docs/anahtar-teslim-plani.md)
+- [Makinece okunur durum](docs/teslim-durumu.json): **NO-GO / üretim teslime hazır değil**
+- [Üretim ve işletim kılavuzu](docs/uretim-isletim-kilavuzu.md)
+- CI: `.github/workflows/cari-ci.yml`; sabit Frappe/ERPNext v15.122.0 ve resmi MariaDB üzerinde sıfırdan kurulum/kabul. Önceki PostgreSQL demo raporu yeni sürüm kabulü yerine geçmez. [Güncel CI](https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043) başarılı: 201 demo kontrolü, 13 temel + 18 ek DB testi, 37 birim/şema kontrolü. Bu başarı bütün modüllerin üretim/UAT onayı değildir.
+
+Bu pakette kullanıcı/rol/şirket/müşteri/depo kapsamı, pasif hesap → SMTP daveti, maliyet alanı koruması, onaylı zimmet ve kısmi iade/iptal, görev çakışması, çek/senet gerçek tahsilatı, sevkiyat ve servis durumları, miktar raporu/iş merkezi ve portal adayları geliştirilmektedir. İş merkezi `/app/cari-merkez`, portal `/cari-portal` yollarındadır. Portal ve e-posta `Cari Settings` üzerinden, eksik bilgi ve yetki varsa varsayılan kapalıdır.
+
+**Çalışma ortamı notu:** önceki demo sunucu/DB süreçleri yeni oturuma taşınmadı; bu oturumda yerel bench/DB ve canlı önizleme yoktur. Kod ve kaynak korunmuştur. Üretim Docker paketi adaydır; bu sandbox'da Docker yoktur. Gerçek VPS/DNS/TLS/SMTP/PDF/restore ve kullanıcı/muhasebe/sağlayıcı kabulü henüz doğrulanmadı. Geliştirme onayı bu dış bağımlılıkları var saydırmaz.
 
 ## Demo kabulünü tekrar çalıştırma
 

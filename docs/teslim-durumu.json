@@ -1,0 +1,233 @@
+{
+  "version": 1,
+  "updated_on": "2026-10-09",
+  "branch": "arena/c5b59147-cari",
+  "development_approval": "all_phases",
+  "production_ready": false,
+  "decision": "NO-GO",
+  "previous_demo_evidence": "docs/faz-1-5-test-sonuclari.md",
+  "current_ci_required": true,
+  "phases": [
+    {
+      "id": "T0",
+      "status": "in_progress"
+    },
+    {
+      "id": "T1",
+      "status": "in_progress"
+    },
+    {
+      "id": "T2",
+      "status": "in_progress"
+    },
+    {
+      "id": "T3",
+      "status": "in_progress"
+    },
+    {
+      "id": "T4",
+      "status": "in_progress"
+    },
+    {
+      "id": "T5",
+      "status": "in_progress"
+    },
+    {
+      "id": "T6",
+      "status": "in_progress"
+    },
+    {
+      "id": "T7",
+      "status": "in_progress"
+    },
+    {
+      "id": "T8",
+      "status": "planned"
+    },
+    {
+      "id": "T9",
+      "status": "planned"
+    }
+  ],
+  "modules": [
+    {
+      "id": "M01",
+      "name": "Dashboard",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M02",
+      "name": "Ürünler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M03",
+      "name": "Depolar ve stok",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M04",
+      "name": "Personel stok tahsisi",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M05",
+      "name": "Satış ve sipariş",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M06",
+      "name": "Satın alma",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M07",
+      "name": "Müşteri ve cari",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M08",
+      "name": "Tahsilat ve çek/senet",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M09",
+      "name": "Teklifler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M10",
+      "name": "Araç ve görev",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M11",
+      "name": "Sevkiyat ve kargo",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M12",
+      "name": "İadeler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M13",
+      "name": "Garanti ve servis",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M14",
+      "name": "Raporlar",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M15",
+      "name": "E-posta",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M16",
+      "name": "Kullanıcı ve yetki",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M17",
+      "name": "Uyumsoft",
+      "status": "blocked_provider_contract",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M18",
+      "name": "Online satış ve portal",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    }
+  ],
+  "external_dependencies": [
+    {
+      "id": "legal_company_and_tax",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "accounting_signoff",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "production_server_and_dns",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "smtp_and_sender",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "uyumsoft_product_version_contract_access",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "portal_payment_decision",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "backup_restore_drill",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "user_acceptance_signoff",
+      "status": "awaiting_real_input",
+      "required": true
+    }
+  ],
+  "current_evidence": {
+    "source_commit": "071ca93254daf2c6dd82fd89bfce74ae93a2771c",
+    "ci_run": 37937955043,
+    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043",
+    "ci_conclusion": "success",
+    "unit_tests": 37,
+    "demo_acceptance_checks": 201,
+    "baseline_regressions": 13,
+    "delivery_regressions": 18,
+    "production_acceptance": false
+  }
+}
