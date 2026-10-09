@@ -41,6 +41,7 @@ doc_events = {
 	"Stock Entry": {"before_cancel": "cari_custom.field_operations.before_stock_entry_cancel"},
 }
 permission_query_conditions = {
+	"Account": "cari_custom.permission_queries.account",
 	"Item": "cari_custom.permission_queries.item",
 	"Company": "cari_custom.permission_queries.company",
 	"Customer": "cari_custom.permission_queries.customer",

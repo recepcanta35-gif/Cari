@@ -111,3 +111,7 @@ def warranty_claim(user=None):
 
 def item(user=None):
 	return query_condition("Item", user)
+
+
+def account(user=None):
+	return query_condition("Account", user)

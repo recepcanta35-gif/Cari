@@ -35,6 +35,7 @@ COMPANY_DOCTYPES = {
 	"Stock Entry",
 	"Stock Ledger Entry",
 	"GL Entry",
+	"Account",
 	"Warehouse",
 	"Stock Assignment",
 	"Stock Assignment Return",
@@ -121,6 +122,8 @@ def record_allowed(doc, scope):
 		return False
 	if kind == "Item" and scope.persona == "Portal":
 		return not doc.disabled and bool(doc.is_sales_item)
+	if kind == "Account" and scope.persona in {"Saha", "Portal"}:
+		return scope.permits_company(doc.company) and doc.account_type == "Receivable" and not doc.is_group
 	if kind == "Company":
 		return scope.permits_company(doc.name)
 	if kind == "Customer":
@@ -227,6 +230,8 @@ def query_condition(doctype, user=None):
 		conditions.append(f"{table}.company = {frappe.db.escape(scope.company)}")
 	if doctype == "Item" and scope.persona == "Portal":
 		conditions.append(f"{table}.disabled=0 AND {table}.is_sales_item=1")
+	if doctype == "Account" and scope.persona in {"Saha", "Portal"}:
+		conditions.append(f"{table}.account_type='Receivable' AND {table}.is_group=0")
 	if doctype == "Company":
 		conditions.append(f"{table}.name = {frappe.db.escape(scope.company)}")
 	if doctype == "Customer":

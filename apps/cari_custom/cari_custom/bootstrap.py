@@ -158,6 +158,8 @@ def _permissions():
 		"Sales Taxes and Charges Template",
 	]:
 		_permission(dt, "Cari Portal", **read_only)
+	for role in ["Cari Portal", "Saha Personeli"]:
+		_permission("Account", role, **{**read_only, "read": 0, "select": 1})
 	for dt in ["Stock Entry", "Stock Ledger Entry", "Supplier"]:
 		_permission(dt, "Depo Personeli", **read_only)
 	for dt in ["Quotation", "Sales Order", "Delivery Note"]:
