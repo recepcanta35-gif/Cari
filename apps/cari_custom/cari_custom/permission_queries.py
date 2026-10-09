@@ -107,3 +107,7 @@ def cari_service_record(user=None):
 
 def warranty_claim(user=None):
 	return query_condition("Warranty Claim", user)
+
+
+def item(user=None):
+	return query_condition("Item", user)

@@ -147,6 +147,17 @@ def _permissions():
 			"Currency",
 		]:
 			_permission(dt, role, **read_only)
+	for dt in [
+		"Item",
+		"Item Group",
+		"UOM",
+		"Company",
+		"Price List",
+		"Currency",
+		"Item Tax Template",
+		"Sales Taxes and Charges Template",
+	]:
+		_permission(dt, "Cari Portal", **read_only)
 	for dt in ["Stock Entry", "Stock Ledger Entry", "Supplier"]:
 		_permission(dt, "Depo Personeli", **read_only)
 	for dt in ["Quotation", "Sales Order", "Delivery Note"]:
@@ -272,6 +283,8 @@ def _protected_fields():
 			if f.fieldname in money_fields:
 				_property(dt, f.fieldname, "permlevel", 1, "Int")
 	# Satış fiyatı değil, maliyet alanları korunur.
+	for key in ["supplier_items", "item_defaults"]:
+		_property("Item", key, "permlevel", 1, "Int")
 	for dt in ["Delivery Note", "Delivery Note Item", "Sales Invoice", "Sales Invoice Item"]:
 		for f in frappe.get_meta(dt).fields:
 			if f.fieldname in COST_FIELDS:

@@ -119,6 +119,8 @@ def record_allowed(doc, scope):
 	kind = doc.doctype
 	if kind in COMPANY_DOCTYPES and not scope.permits_company(doc.get("company")):
 		return False
+	if kind == "Item" and scope.persona == "Portal":
+		return not doc.disabled and bool(doc.is_sales_item)
 	if kind == "Company":
 		return scope.permits_company(doc.name)
 	if kind == "Customer":
@@ -223,6 +225,8 @@ def query_condition(doctype, user=None):
 	conditions = []
 	if doctype in COMPANY_DOCTYPES:
 		conditions.append(f"{table}.company = {frappe.db.escape(scope.company)}")
+	if doctype == "Item" and scope.persona == "Portal":
+		conditions.append(f"{table}.disabled=0 AND {table}.is_sales_item=1")
 	if doctype == "Company":
 		conditions.append(f"{table}.name = {frappe.db.escape(scope.company)}")
 	if doctype == "Customer":
