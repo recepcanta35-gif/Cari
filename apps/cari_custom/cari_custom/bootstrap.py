@@ -325,6 +325,9 @@ def _legacy_metadata():
 
 
 def run():
+	from cari_custom.security import install_query_guard
+
+	install_query_guard()
 	_fields()
 	_roles()
 	_permissions()

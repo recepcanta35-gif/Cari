@@ -364,6 +364,7 @@ class CariUserScope(Document):
 
 
 def before_request():
+	install_query_guard()
 	request = getattr(frappe.local, "request", None)
 	if not request:
 		return
@@ -440,3 +441,37 @@ def after_request(response, request=None):
 		data = redact_costs(data, quantity_only=scope.persona == "Depo")
 		response.set_data(json.dumps(data, ensure_ascii=False, default=str))
 		response.headers["Content-Type"] = "application/json"
+
+
+def install_query_guard(**_kwargs):
+	"""PQC'yi paylaşım OR koşulunun dışında da uygular; hiçbir rol hakkı vermez.
+
+	Frappe v15, User Permission + özel PQC toplamına DocShare'ı OR ile ekler.
+	Yalnız yönetilen Cari kullanıcıları için en dışta kapsam AND'i gerekir.
+	get_all(ignore_permissions) ve sistem/üçüncü taraf kullanıcıları etkilenmez.
+	"""
+	from functools import wraps
+
+	from frappe.model.db_query import DatabaseQuery
+
+	original = DatabaseQuery.build_match_conditions
+	if getattr(original, "_cari_scope_guard", False):
+		return
+
+	@wraps(original)
+	def scoped(query, as_condition=True):
+		result = original(query, as_condition=as_condition)
+		if (
+			not as_condition
+			or query.flags.ignore_permissions
+			or is_system_manager(query.user)
+			or not is_managed(query.user)
+		):
+			return result
+		strict = query_condition(query.doctype, query.user)
+		if strict:
+			return f"({result}) AND ({strict})" if result else strict
+		return result
+
+	scoped._cari_scope_guard = True
+	DatabaseQuery.build_match_conditions = scoped

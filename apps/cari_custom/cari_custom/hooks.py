@@ -71,3 +71,5 @@ permission_query_conditions = {
 }
 
 doctype_js = {name: "public/js/operations.js" for name in ["Stock Assignment", "Daily Assignment", "Cari Shipment", "Cari Service Record"]}
+
+before_job += ["cari_custom.security.install_query_guard"]
