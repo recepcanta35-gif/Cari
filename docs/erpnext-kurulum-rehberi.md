@@ -110,3 +110,14 @@ bench start   # web: 0.0.0.0:8000, socketio: 0.0.0.0:9000
 - Uyumsoft ürün/sürüm/erişim yetkisi onayı beklenecek (kapsam koşulu)
 - `uyumsoft_integration` app'i: connector (REST/SOAP) + UBL-TR eşleme + kuyruk işleyici
 - Test: ürün/cari/fatura aktarımı, e-Fatura gönderimi (GİB entegratör üzerinden)
+
+## 8. Faz 1 — Türkiye Temel Yapılandırması (TAMAMLANDI — 9 Ekim 2026)
+
+`bench --site cari.local console` içinde `cari_custom.setup_turkey.run()` çalıştırıldı (idempotent — tekrar çalıştırılabilir). Script: `apps/cari_custom/cari_custom/setup_turkey.py`.
+
+- **Şirket:** Cari A.Ş. (CARI, Turkey, TRY) + jenerik chart of accounts (82 hesap) + varsayılan depolar (Stores/WIP/Finished Goods/Transit)
+- **KDV:** KDV %20 (varsayılan) / %10 / %1 — Sales Taxes and Charges Template + Item Tax Template (KDV hesabı: company setup'ın "VAT 18% - CARI" — tekdüzen plana göre düzenlenecek)
+- **Tanımlar:** UOM (Nos, Kg, m, Koli), Item Group (Genel), Customer Group (Bireysel/Kurumsal), Supplier Group (Yerli Tedarikçi), Territory (Türkiye + 7 bölge), Payment Terms (Peşin/30/60 gün), Mode of Payment (Nakit, Kredi Kartı, Havale/EFT, Çek, Senet), Banka - TRY hesabı, Saha Deposu
+- **Roller (modül 16):** "Saha Personeli" — Sales Order/Quotation/Delivery Note CRUD; Customer/Item/Warehouse/Employee/Vehicle read; Stock Assignment + Daily Assignment CRUD (Custom DocPerm). Diğer roller: ERPNext hazır rolleri (Sales/Purchase/Accounts/Stock/HR User+Manager, System Manager).
+- **Hatırlatma (modül 15):** Notification "Tahsilat Vadesi Yaklaşıyor" — Sales Invoice due_date, 7 gün önce, Email kanalı, Accounts Manager. SMTP (Email Account) ayarlanınca gönderim başlar.
+- **Notlar:** developer_mode açık (site_config.json — DocType permission düzenleme için); v15'te Email Alert doctype yok → Notification kullanıldı; PDF (weasyprint/wkhtmltopdf) bu ortamda kurulamıyor (libpango/libXrender eksik) — production sunucuda apt ile kurulacak.

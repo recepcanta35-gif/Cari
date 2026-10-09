@@ -22,7 +22,7 @@
  "naming_rule": "Random",
  "autoname": "format:UTL-{#####}",
  "owner": "Administrator",
- "permissions": [{"create": 1, "delete": 1, "email": 1, "print": 1, "read": 1, "role": "System Manager", "share": 1, "write": 1}],
+ "permissions": [{"create": 1, "delete": 1, "email": 1, "print": 1, "read": 1, "role": "System Manager", "share": 1, "write": 1}, {"read": 1, "role": "Accounts Manager"}, {"read": 1, "role": "Accounts User"}],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": []

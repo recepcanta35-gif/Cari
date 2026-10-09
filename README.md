@@ -36,6 +36,12 @@ bench start          # geliştirme sunucusu (0.0.0.0:8000)
 
 Kurulum detayları ve sandbox workaround'ları: [docs/erpnext-kurulum-rehberi.md](docs/erpnext-kurulum-rehberi.md)
 
+## Durum (9 Ekim 2026)
+
+- ✅ **Faz 0–1 tamamlandı:** ERPNext v15 + PostgreSQL + site `cari.local` yayında (0.0.0.0:8000)
+- ✅ **Faz 1 — Türkiye yapılandırması:** şirket (Cari A.Ş., TRY), KDV %1/%10/%20, temel tanımlar (birim, grup, bölge, vade, ödeme tipleri, saha deposu), rol matrisi (Saha Personeli), e-posta hatırlatması
+- 🔲 **Sonraki:** örnek veri + uçtan uca test (ürün → stok → cari → sipariş → fatura → tahsilat); Uyumsoft entegrasyonu (ürün/sürüm/yetki onayı sonrası); online webshop/portal (Faz 5)
+
 ## Kapsam notları (değiştirilemez)
 
 - Barkod ve SMS modülü yoktur; ürün seçimi ad, ürün kodu, kategori ve fotoğraf üzerinden.
