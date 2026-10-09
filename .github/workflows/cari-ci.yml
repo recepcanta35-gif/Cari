@@ -78,7 +78,11 @@ jobs:
           printf '\ncari_custom\nuyumsoft_integration\n' >> sites/apps.txt
           env/bin/pip install --no-deps -e apps/cari_custom -e apps/uyumsoft_integration
       - name: Fresh MariaDB site
+        shell: bash
         run: |
+          set -Eeuo pipefail
+          exec > >(tee "$RUNNER_TEMP/cari-step.log") 2>&1
+          trap 'python "$GITHUB_WORKSPACE/scripts/ci_annotation.py" "$RUNNER_TEMP/cari-step.log"' ERR
           cd "$BENCH"
           bench new-site "$SITE" --db-type mariadb --db-host 127.0.0.1 --db-port 3306 --db-root-username root --db-root-password "$CI_DB_PASSWORD" --admin-password "$CI_ADMIN_PASSWORD" --set-default --install-app erpnext
           bench --site "$SITE" install-app cari_custom
@@ -87,7 +91,11 @@ jobs:
           bench --site "$SITE" execute cari_custom.setup_turkey.run
           bench --site "$SITE" execute cari_custom.sample_data.run --kwargs '{"allow_demo": True}' > logs/demo-acceptance.json
       - name: Backend regressions and permission acceptance
+        shell: bash
         run: |
+          set -Eeuo pipefail
+          exec > >(tee "$RUNNER_TEMP/cari-step.log") 2>&1
+          trap 'python "$GITHUB_WORKSPACE/scripts/ci_annotation.py" "$RUNNER_TEMP/cari-step.log"' ERR
           cd "$BENCH"
           env/bin/python "$GITHUB_WORKSPACE/scripts/run_faz15_tests.py" --bench "$BENCH" --site "$SITE" --report "$GITHUB_WORKSPACE/mariadb-demo-evidence.json"
           if [ -f "$GITHUB_WORKSPACE/scripts/run_delivery_tests.py" ]; then
