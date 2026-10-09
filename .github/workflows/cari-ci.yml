@@ -1,0 +1,101 @@
+name: Cari acceptance
+
+on:
+  push:
+    branches: [arena/c5b59147-cari]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: cari-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - run: python -m pip install pytest ruff pyyaml requests defusedxml
+      - run: python -m compileall -q apps scripts
+      - run: pytest --junitxml=unit-results.xml
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: unit-evidence
+          path: unit-results.xml
+          retention-days: 14
+
+  mariadb:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    services:
+      db:
+        image: mariadb:10.6
+        env:
+          MARIADB_ROOT_PASSWORD: ci-ephemeral-not-production
+          MARIADB_ROOT_HOST: '%'
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mariadb-admin ping -h localhost -pci-ephemeral-not-production"
+          --health-interval=5s --health-timeout=5s --health-retries=30
+    env:
+      CI_DB_PASSWORD: ci-ephemeral-not-production
+      BENCH: /home/runner/frappe-bench
+      SITE: cari-ci.local
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020
+        with:
+          node-version: '22'
+      - name: System prerequisites
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y mariadb-client redis-server libpango-1.0-0 libpangoft2-1.0-0 libpangocairo-1.0-0 libharfbuzz0b libldap2-dev libsasl2-dev
+          npm install -g yarn@1.22.22
+          python -m pip install frappe-bench
+          redis-server --port 13000 --daemonize yes --save '' --appendonly no
+          redis-server --port 11000 --daemonize yes --save '' --appendonly no
+          password=$(python -c 'import secrets; print(secrets.token_urlsafe(32))')
+          echo "::add-mask::$password"
+          echo "CI_ADMIN_PASSWORD=$password" >> "$GITHUB_ENV"
+      - name: Pinned framework and ERP
+        run: |
+          bench init --python "$(which python)" --frappe-branch v15.122.0 --no-backups --skip-assets "$BENCH"
+          cd "$BENCH"
+          bench get-app erpnext --branch v15.122.0
+          ln -s "$GITHUB_WORKSPACE/apps/cari_custom" apps/cari_custom
+          ln -s "$GITHUB_WORKSPACE/apps/uyumsoft_integration" apps/uyumsoft_integration
+          printf '\ncari_custom\nuyumsoft_integration\n' >> sites/apps.txt
+          env/bin/pip install --no-deps -e apps/cari_custom -e apps/uyumsoft_integration
+      - name: Fresh MariaDB site
+        run: |
+          cd "$BENCH"
+          bench new-site "$SITE" --db-type mariadb --db-host 127.0.0.1 --db-port 3306 --db-root-username root --db-root-password "$CI_DB_PASSWORD" --admin-password "$CI_ADMIN_PASSWORD" --set-default --install-app erpnext
+          bench --site "$SITE" install-app cari_custom
+          bench --site "$SITE" install-app uyumsoft_integration
+          bench --site "$SITE" set-config developer_mode 1
+          bench --site "$SITE" execute cari_custom.setup_turkey.run
+          bench --site "$SITE" execute cari_custom.sample_data.run --kwargs '{"allow_demo": True}' > logs/demo-acceptance.json
+      - name: Backend regressions and permission acceptance
+        run: |
+          cd "$BENCH"
+          env/bin/python "$GITHUB_WORKSPACE/scripts/run_faz15_tests.py" --bench "$BENCH" --site "$SITE" --report "$GITHUB_WORKSPACE/mariadb-demo-evidence.json"
+          if [ -f "$GITHUB_WORKSPACE/scripts/run_delivery_tests.py" ]; then
+            env/bin/python "$GITHUB_WORKSPACE/scripts/run_delivery_tests.py" --bench "$BENCH" --site "$SITE" --report "$GITHUB_WORKSPACE/mariadb-delivery-evidence.json"
+          fi
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02
+        if: always()
+        with:
+          name: mariadb-evidence
+          path: '*-evidence.json'
+          retention-days: 14

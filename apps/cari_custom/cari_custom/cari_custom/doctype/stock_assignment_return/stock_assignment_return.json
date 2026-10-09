@@ -1,0 +1,121 @@
+{
+ "doctype": "DocType",
+ "name": "Stock Assignment Return",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "creation": "2026-10-09 12:00:00.000000",
+ "modified": "2026-10-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Seri",
+   "default": "SAR-.#####",
+   "options": "SAR-.#####"
+  },
+  {
+   "fieldname": "assignment",
+   "fieldtype": "Link",
+   "label": "Zimmet",
+   "reqd": 1,
+   "options": "Stock Assignment"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "read_only": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "quantity",
+   "fieldtype": "Float",
+   "label": "İade Miktarı",
+   "reqd": 1
+  },
+  {
+   "fieldname": "posting_date",
+   "fieldtype": "Date",
+   "label": "İade Tarihi",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "stock_entry",
+   "fieldtype": "Link",
+   "label": "İade Stok Transferi",
+   "read_only": 1,
+   "options": "Stock Entry"
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Small Text",
+   "label": "İade Gerekçesi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Small Text",
+   "label": "İade Seri Numaraları"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "İade Partisi",
+   "options": "Batch"
+  }
+ ],
+ "field_order": [
+  "naming_series",
+  "assignment",
+  "company",
+  "quantity",
+  "posting_date",
+  "stock_entry",
+  "reason",
+  "serial_no",
+  "batch_no"
+ ],
+ "track_changes": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Depo Personeli",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  },
+  {
+   "role": "Cari Yönetici",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1
+  }
+ ],
+ "links": [],
+ "actions": [],
+ "states": [],
+ "autoname": "naming_series:",
+ "is_submittable": 1
+}

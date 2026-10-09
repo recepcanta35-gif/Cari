@@ -13,7 +13,11 @@
   "gorev",
   "baslangic_saati",
   "bitis_saati",
-  "durum"
+  "durum",
+  "company",
+  "actual_start",
+  "actual_end",
+  "completion_note"
  ],
  "fields": [
   {
@@ -74,7 +78,37 @@
    "fieldtype": "Select",
    "label": "Durum",
    "options": "Planlandı\nSahada\nTamamlandı\nİptal",
-   "default": "Planlandı"
+   "default": "Planlandı",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "read_only": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "actual_start",
+   "fieldtype": "Datetime",
+   "label": "Gerçek Başlangıç",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "actual_end",
+   "fieldtype": "Datetime",
+   "label": "Gerçek Bitiş",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "completion_note",
+   "fieldtype": "Small Text",
+   "label": "Sonuç Notu",
+   "read_only": 1,
+   "allow_on_submit": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -87,29 +121,46 @@
  "owner": "Administrator",
  "permissions": [
   {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
   },
   {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
+   "role": "Cari Yönetici",
    "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Depo Personeli",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
    "role": "Saha Personeli",
-   "share": 1,
-   "write": 1
+   "read": 1,
+   "write": 1,
+   "print": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "autoname": "naming_series:",
- "track_changes": 1
+ "track_changes": 1,
+ "is_submittable": 1
 }

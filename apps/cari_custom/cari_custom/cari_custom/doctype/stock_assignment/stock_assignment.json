@@ -13,8 +13,15 @@
   "atama_tarihi",
   "iade_tarihi",
   "durum",
+  "aciklama",
   "stok_hareketi",
-  "aciklama"
+  "company",
+  "kaynak_depo",
+  "serial_no",
+  "batch_no",
+  "iade_miktar",
+  "satilan_miktar",
+  "kalan_miktar"
  ],
  "fields": [
   {
@@ -72,8 +79,10 @@
    "fieldname": "durum",
    "fieldtype": "Select",
    "label": "Durum",
-   "options": "Aktif\nKısmi İade\nİade Edildi",
-   "default": "Aktif"
+   "options": "Aktif\nKısmi İade\nİade Edildi\nTükendi\nİptal",
+   "default": "Aktif",
+   "read_only": 1,
+   "allow_on_submit": 1
   },
   {
    "fieldname": "aciklama",
@@ -86,7 +95,54 @@
    "label": "Stok Transferi",
    "options": "Stock Entry",
    "read_only": 1,
-   "description": "Zimmeti destekleyen stok transferi. Otomatik transfer Faz 2 kapsamındadır."
+   "description": "Onayda oluşan gerçek stok transferi; aynı transfer ikinci zimmete bağlanamaz.",
+   "unique": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "read_only": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "kaynak_depo",
+   "fieldtype": "Link",
+   "label": "Kaynak Depo",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Small Text",
+   "label": "Seri Numaraları"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Parti",
+   "options": "Batch"
+  },
+  {
+   "fieldname": "iade_miktar",
+   "fieldtype": "Float",
+   "label": "İade Edilen",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "satilan_miktar",
+   "fieldtype": "Float",
+   "label": "Net Satılan",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "kalan_miktar",
+   "fieldtype": "Float",
+   "label": "Kalan Zimmet",
+   "read_only": 1,
+   "allow_on_submit": 1
   }
  ],
  "index_web_pages_for_search": 1,
@@ -99,29 +155,45 @@
  "owner": "Administrator",
  "permissions": [
   {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
-   "read": 1,
    "role": "System Manager",
-   "share": 1,
-   "write": 1
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
   },
   {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "print": 1,
+   "role": "Cari Yönetici",
    "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Depo Personeli",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
    "role": "Saha Personeli",
-   "share": 1,
-   "write": 1
+   "read": 1,
+   "print": 1
   }
  ],
  "sort_field": "modified",
  "sort_order": "DESC",
  "states": [],
  "autoname": "naming_series:",
- "track_changes": 1
+ "track_changes": 1,
+ "is_submittable": 1
 }

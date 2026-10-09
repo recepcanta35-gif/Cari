@@ -343,5 +343,11 @@ def run():
 	_setup_master_data(company)
 	_setup_roles()
 	_setup_notifications()
+	from cari_custom.bootstrap import run as setup_access
+	from cari_custom.bootstrap import setup_defaults
+
+	setup_access()
+	if frappe.db.exists("Price List", "Standard Selling"):
+		setup_defaults(company.name)
 	frappe.db.commit()
 	print("FAZ1_TAMAM:", company.name)

@@ -216,8 +216,12 @@ def _create_parties():
 					"territory": territory,
 					"payment_terms": terms,
 					"default_currency": "TRY",
+					"cari_company": COMPANY,
 				}
 			).insert(set_name=name)
+	for name in [CUSTOMER, "Ahmet Yılmaz"]:
+		if not frappe.db.get_value("Customer", name, "cari_company"):
+			frappe.db.set_value("Customer", name, "cari_company", COMPANY)
 	if not frappe.db.exists("Supplier", SUPPLIER):
 		frappe.get_doc(
 			{
@@ -225,6 +229,7 @@ def _create_parties():
 				"supplier_name": SUPPLIER,
 				"supplier_group": "Yerli Tedarikçi",
 				"default_currency": "TRY",
+				"cari_company": COMPANY,
 			}
 		).insert(set_name=SUPPLIER)
 
@@ -265,6 +270,8 @@ def _create_employees_and_vehicle():
 				"uom": "Km",
 			}
 		).insert()
+	if not frappe.db.get_value("Vehicle", VEHICLE, "cari_company"):
+		frappe.db.set_value("Vehicle", VEHICLE, "cari_company", COMPANY)
 	return frappe.db.get_value("Employee", {"employee_name": EMPLOYEE, "company": COMPANY}, "name")
 
 
@@ -495,6 +502,9 @@ def run(allow_demo=False, existing_documents=None):
 	frappe.local.lang = "tr"
 	try:
 		_ensure_reference_data()
+		from cari_custom.bootstrap import setup_defaults
+
+		setup_defaults(COMPANY)
 		_create_items()
 		_create_parties()
 		employee = _create_employees_and_vehicle()

@@ -1,0 +1,89 @@
+{
+ "doctype": "DocType",
+ "name": "Cari User Scope",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "creation": "2026-10-09 12:00:00.000000",
+ "modified": "2026-10-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "fields": [
+  {
+   "fieldname": "user",
+   "fieldtype": "Link",
+   "label": "Kullanıcı",
+   "reqd": 1,
+   "unique": 1,
+   "options": "User"
+  },
+  {
+   "fieldname": "enabled",
+   "fieldtype": "Check",
+   "label": "Etkin",
+   "default": "1"
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "reqd": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "persona",
+   "fieldtype": "Select",
+   "label": "Erişim Profili",
+   "reqd": 1,
+   "options": "Yönetici\nKullanıcı Yöneticisi\nMuhasebe\nSatış\nSaha\nDepo\nServis\nİnsan Kaynakları\nPortal"
+  },
+  {
+   "fieldname": "employee",
+   "fieldtype": "Link",
+   "label": "Personel",
+   "options": "Employee"
+  },
+  {
+   "fieldname": "customers",
+   "fieldtype": "Table",
+   "label": "Müşteri Kapsamı",
+   "options": "Cari Scope Customer"
+  },
+  {
+   "fieldname": "warehouses",
+   "fieldtype": "Table",
+   "label": "Depo Kapsamı",
+   "options": "Cari Scope Warehouse"
+  },
+  {
+   "fieldname": "notes",
+   "fieldtype": "Small Text",
+   "label": "Gerekçe"
+  }
+ ],
+ "field_order": [
+  "user",
+  "enabled",
+  "company",
+  "persona",
+  "employee",
+  "customers",
+  "warehouses",
+  "notes"
+ ],
+ "track_changes": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "print": 1
+  }
+ ],
+ "links": [],
+ "actions": [],
+ "states": [],
+ "autoname": "field:user"
+}
