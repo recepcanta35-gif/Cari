@@ -243,7 +243,7 @@
     "proposed_upload_folder": "public_html/nexterp",
     "ssh_root_or_sudo_verified": false,
     "docker_runtime_verified": false,
-    "connection_attempted": false,
+    "connection_attempted": true,
     "files_uploaded": false,
     "existing_website_must_be_preserved": true,
     "credentials_recorded": false,
@@ -262,6 +262,14 @@
     "phpmyadmin_url_received": true,
     "authenticated": false,
     "database_changed": false,
-    "connection_blocker": "Current workspace outbound network scope does not include the supplied SSH/FTP/HTTPS targets"
+    "connection_blocker": "TCP connections close before SSH/FTP greeting; HTTP disconnects; phpMyAdmin TLS ends with EOF. Cause not established by these checks.",
+    "attempt_type": "read_only_transport_and_protocol_greeting_checks",
+    "passwords_transmitted": false,
+    "transport_check": {
+      "ssh_65002": "TCP accepted; closed without SSH banner",
+      "ftp_21": "TCP accepted; closed without FTP greeting",
+      "erp_http": "RemoteDisconnected: closed without HTTP response",
+      "phpmyadmin_https": "TLS/SSL EOF before HTTP response"
+    }
   }
 }

@@ -68,3 +68,15 @@ Kullanıcı `nexterp.skysoftteknoloji.com.tr` subdomain'inin açıldığını bi
 MySQL görüntüsü veritabanı/kullanıcı oluşturma formunu gösterir; başarılı oluşturma/listede görünme veya DB erişimi teyit edilmedi. phpMyAdmin adresi alınmıştır ancak oturum açılmamıştır. Parola/SSH/FTP/DB sırları bu dokümana, örnek dosyaya veya Git'e alınmaz; parola yeniden paylaşılmaz.
 
 Bu çalışma ortamının dış ağ kapsamı verilen IP/SSH/FTP ve Hostinger HTTPS hedeflerini içermez. Hiçbir ağ kısıtı dolanılmadı, başka servise parola aktarılmadı, bağlantı denendi ya da oturum açıldı iddiasında bulunulmadı. Mevcut site, klasör ve DB üzerinde değişiklik yapılmadı. Operatör tarafında güvenli erişimle çalışma veya bu hedeflere erişebilen yetkili dağıtım ortamı gerekir. PHP cloud ortamına ERPNext runtime hizmetleri mevcutmuş gibi yükleme yapılmaz.
+
+
+## Sonraki gerçek erişim denemesi — yalnız transport/protokol
+
+Kullanıcının tekrarlanan bağlantı isteği üzerine bir kez sınırlı, paralel ve salt-okunur kontrol çalıştırıldı. Parola, AUTH/USER/PASS komutu veya oturum bilgisi gönderilmedi. Önceki “denenmedi” kayıtları bu sonraki transport kontrolünü kapsamaz.
+
+- SSH 65002: TCP bağlantısı kabul edildi, ancak sunucu karşılama satırı (`SSH-...`) gelmeden bağlantı kapandı.
+- FTP 21: TCP bağlantısı kabul edildi, ancak FTP greeting gelmeden bağlantı kapandı.
+- ERP alt alanı HTTP: karşı uç HTTP yanıtı vermeden bağlantıyı kapattı (`RemoteDisconnected`).
+- phpMyAdmin HTTPS: TLS/SSL bağlantısı HTTP yanıtı gelmeden EOF ile kapandı.
+
+Yalnız TCP açılması, gerçek SSH/FTP servisine veya kimlik doğrulamasına ulaşılmış olduğu anlamına gelmez. Bu sonuçlardan “şifre yanlış”, “hesap kapalı” veya “Hostinger SSH kapalı” sonucu çıkarılamaz. Ağ/ara katman/sunucu kaynaklı kapanmanın nedeni bu kontrollerle kesinleşmedi. Bağlantı kısıtlarını dolanma, TLS doğrulamasını kapatma, üçüncü servise parola aktarma, giriş, upload veya DB/site değişikliği yapılmadı. Kimlik doğrulama seviyesine ulaşılamadığı için parola kullanılmadı.
