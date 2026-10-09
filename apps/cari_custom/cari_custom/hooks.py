@@ -70,6 +70,11 @@ permission_query_conditions = {
 	"Warranty Claim": "cari_custom.permission_queries.warranty_claim",
 }
 
-doctype_js = {name: "public/js/operations.js" for name in ["Stock Assignment", "Daily Assignment", "Cari Shipment", "Cari Service Record"]}
+doctype_js = dict.fromkeys(
+	["Stock Assignment", "Daily Assignment", "Cari Shipment", "Cari Service Record"],
+	"public/js/operations.js",
+)
 
 before_job += ["cari_custom.security.install_query_guard"]
+
+scheduler_events = {"daily": ["cari_custom.notifications.daily"]}

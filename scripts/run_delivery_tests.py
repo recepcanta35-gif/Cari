@@ -25,6 +25,9 @@ def main():
 		if not frappe.conf.get("developer_mode"):
 			parser.error("Test verisi yalnız demo/developer sitesinde kullanılabilir")
 		suite = unittest.defaultTestLoader.loadTestsFromName("cari_custom.tests.test_delivery")
+		suite.addTests(
+			unittest.defaultTestLoader.loadTestsFromName("cari_custom.tests.test_business.BusinessTests")
+		)
 		result = unittest.TextTestRunner(verbosity=2).run(suite)
 		evidence = {
 			"suite": "identity-field-operations",

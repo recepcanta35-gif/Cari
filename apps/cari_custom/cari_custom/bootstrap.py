@@ -333,6 +333,8 @@ def run():
 	_permissions()
 	_protected_fields()
 	_legacy_metadata()
+	if frappe.db.exists("Notification", "Tahsilat Vadesi Yaklaşıyor"):
+		frappe.db.set_value("Notification", "Tahsilat Vadesi Yaklaşıyor", "enabled", 0)
 	frappe.clear_cache()
 
 

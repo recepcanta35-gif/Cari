@@ -1,0 +1,15 @@
+{% extends "templates/web.html" %}
+{% block title %}Cari · Müşteri Portalı{% endblock %}
+{% block page_content %}
+<style>
+.cari-portal{max-width:1120px;margin:auto;padding:24px 0;color:#183442}.cari-hero{padding:38px;border-radius:20px;background:#123e49;color:#fff;margin-bottom:24px}.cari-hero h1{color:#fff;font-size:34px}.cari-tools{display:flex;gap:12px;flex-wrap:wrap;margin:20px 0}.cari-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px}.cari-product{border:1px solid #dce5e7;border-radius:16px;padding:20px;background:#fff;display:flex;flex-direction:column;gap:12px}.cari-product img{height:150px;width:100%;object-fit:contain}.cari-product h3{font-size:18px;margin:0}.cari-product small{color:#647983}.cari-product button,.cari-portal .cari-primary{background:#14655d;color:white;border:0;border-radius:10px;padding:11px 16px}.cari-cart{margin:24px 0;padding:24px;border:1px solid #dce5e7;border-radius:16px;background:#f5f9f8}.cari-records{overflow:auto}.cari-records td,.cari-records th{padding:10px;border-bottom:1px solid #dce5e7;white-space:nowrap}.cari-records table{width:100%}.cari-status{color:#526b74;min-height:25px}@media(max-width:600px){.cari-hero{padding:24px}.cari-hero h1{font-size:26px}}
+</style>
+<div class="cari-portal">
+ <header class="cari-hero"><small>CARİ · MÜŞTERİ PORTALI</small><h1>Ürünleriniz, siparişleriniz ve hesabınız.</h1><p>Ürün adı, kodu ve kategoriyle arayın. Sipariş ve cari kayıtlarınızı tek yerden takip edin.</p></header>
+ <div class="cari-tools"><input id="cari-search" class="form-control" placeholder="Ürün adı veya kodu" aria-label="Ürün arama" style="max-width:400px"><button id="cari-search-button" class="cari-primary">Ürünleri Bul</button><a href="/login?redirect-to=/cari-portal" class="btn btn-default">Giriş / Hesabım</a></div>
+ <p class="cari-status" id="cari-status" role="status"></p><main id="cari-products" class="cari-grid"></main>
+ <section class="cari-cart"><h2>Sepet</h2><div id="cari-cart-items"></div><p>Fiyatlar KDV hariçtir; vergi ve toplam sunucuda hesaplanır. Sipariş işletme onayına gönderilir; stok rezervasyonu vaadi değildir.</p><button id="cari-order" class="cari-primary">Siparişi Onaya Gönder</button></section>
+ <section><h2>Kayıtlarım</h2><div class="cari-tools"><select id="cari-kind" class="form-control" style="max-width:300px"><option value="Sales Order">Siparişler</option><option value="Quotation">Teklifler</option><option value="Sales Invoice">Faturalar</option><option value="Cari Shipment">Sevkiyatlar</option><option value="Cari Service Record">Servis Geçmişi</option></select><button id="cari-records-button" class="btn btn-default">Kayıtları Getir</button></div><div class="cari-records" id="cari-records"></div></section>
+</div>
+<script src="/assets/cari_custom/js/portal.js"></script>
+{% endblock %}
