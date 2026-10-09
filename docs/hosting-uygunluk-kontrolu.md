@@ -37,3 +37,18 @@ Mevcut site olduğu gibi kalır. ERP için örneğin `erp.skysoftteknoloji.com.t
 Hostinger **VPS → Genel Bakış / işletim sistemi** ekranının veya **Hosting Planı** ekranının, parolalar ve anahtarlar görünmeden paylaşılması yeterlidir. Amaç yalnız ortam türünü ve yetkilerini belirlemektir; geliştirme fazlarının onayı tekrar istenmez.
 
 Uygun çalışma ortamı doğrulanmadan üretim teslim kapısı **NO-GO** kalır. Sunucu seçimi/ücretli kaynak oluşturma veya mevcut siteyi değiştirme otomatik yapılmaz.
+
+## Kullanıcının netleştirmesi — SSH açık, ortam VPS değil
+
+Kullanıcı ortamı açıkça **PHP/MySQL bulut hosting, VPS değil** olarak teyit etti. Yeni görüntüde SSH aktif ve bağlantı noktası 65002. Ortam türü tekrar sorulmayacak; FTP/SSH bilgileri yeniden istenmeyecek.
+
+SSH bir erişim yöntemidir; Python web trafiği yönlendirmesi, Redis, kalıcı worker/scheduler/websocket yönetimi veya Docker yetkisi demek değildir. PHP/MySQL'nin bulunması da ERPNext'in Python uygulama katmanının karşılığı değildir. Gerçek sunucuda bu servis yetkileri test edilmedi; yokmuş gibi test sonucu uydurulmaz. Mevcut Docker paketinin VPS/dedicated hedef ön kontrolü, `php_cloud` değerini açıkça reddeder.
+
+**İki ayrı konu vardır:**
+
+1. Seçilen ERPNext mimarisinin uygun bir çalışma ortamına ihtiyacı vardır. Mevcut web sitesini bu hostingte tutup ERP'yi ayrı Frappe destekli yönetilen barındırma veya VPS/dedicated ortamında aynı domainin bir subdomain'i ile sunmak mümkündür. Yeni kaynak/ücret kendiliğinden oluşturulmaz.
+2. Bu asistan çalışma ortamından sağlanan IP'ye doğrudan FTP/SSH ağ bağlantısı kurulamıyor. Parolanın paylaşılmış olması bu bağlantı yeteneğini açmaz. Hiçbir oturum, yükleme, DNS değişikliği veya mevcut site değişikliği yapılmadı.
+
+ERP'nin **yalnız bu PHP cloud hesabında** çalışması kesin şart haline gelirse, ERPNext yerine PHP uyumlu farklı bir uygulama/mimari gerekir. Bu önceki ERPNext kararı ve geliştirme kapsamı değişikliğidir; sessizce başka sisteme geçilmez. Mevcut ERPNext geliştirmenin onayı ve bağımsız modül işleri korunur.
+
+Sohbette paylaşılmış parola tekrar edilmez/kaydedilmez; değiştirilmesi önerilir. Bu not veya ön kontrol gerçek hostingte yapılmış servis testi, canlı kurulum ya da anahtar teslim kabulü değildir.

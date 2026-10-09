@@ -15,10 +15,11 @@
     "operator_contact": "",
     "website_domain": "skysoftteknoloji.com.tr",
     "hosting_provider": "Hostinger",
-    "observed_access": "FTP / web file manager",
-    "deployment_target": "unconfirmed",
+    "observed_access": "FTP and active SSH; PHP/MySQL cloud hosting",
+    "deployment_target": "php_cloud",
     "root_or_sudo_ssh_verified": false,
-    "existing_website_must_be_preserved": true
+    "existing_website_must_be_preserved": true,
+    "user_confirmed_not_vps": true
   },
   "smtp": {
     "reported_ready": true,

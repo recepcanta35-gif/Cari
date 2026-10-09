@@ -14,6 +14,11 @@ def check_environment(values):
 	def add(name, passed, message):
 		checks.append({"id": name, "passed": bool(passed), "message": message})
 
+	add(
+		"hosting_target",
+		values.get("DEPLOYMENT_TARGET") in {"vps", "dedicated"},
+		"Bu Docker paketi VPS/dedicated çalışma ortamı ister; PHP/MySQL cloud hosting ve SSH tek başına yeterli değildir",
+	)
 	for key in ("CARI_DOMAIN", "CARI_SITE"):
 		value = values.get(key, "")
 		add(

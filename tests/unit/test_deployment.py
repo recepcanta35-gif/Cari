@@ -15,6 +15,7 @@ def test_example_environment_is_not_production_ready():
 
 def test_preflight_redacts_all_password_values():
 	values = {
+		"DEPLOYMENT_TARGET": "vps",
 		"CARI_DOMAIN": "erp.company.test",
 		"CARI_SITE": "erp.company.test",
 		"CARI_IMAGE": "cari/erpnext:0.1.0",
@@ -37,3 +38,16 @@ def test_only_reverse_proxy_exposes_ports_and_application_has_egress():
 	for name in ["backend", "queue-short", "queue-long", "scheduler"]:
 		assert "egress" in data["services"][name]["networks"]
 	assert "INITIAL_ADMIN_PASSWORD" not in str(data["services"]["backend"]["environment"])
+
+
+def test_php_cloud_ssh_does_not_make_docker_target_compatible():
+	values = {
+		"DEPLOYMENT_TARGET": "php_cloud",
+		"CARI_DOMAIN": "erp.company.test", "CARI_SITE": "erp.company.test",
+		"CARI_IMAGE": "cari/erpnext:0.1.0", "ERPNEXT_VERSION": "v15.122.0",
+		"DB_ROOT_PASSWORD": "A" * 32, "INITIAL_ADMIN_PASSWORD": "B" * 32,
+		"ACME_EMAIL": "ops@company.test",
+	}
+	result = module.check_environment(values)
+	assert result["decision"] == "BLOCKED"
+	assert [c["id"] for c in result["checks"] if not c["passed"]] == ["hosting_target"]
