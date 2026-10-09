@@ -1,0 +1,35 @@
+{
+  "legal_company": {
+    "status": "later",
+    "name": "",
+    "tax_id": "",
+    "tax_office": "",
+    "address": "",
+    "accounting_approver": ""
+  },
+  "production": {
+    "reported_existing": true,
+    "domain": "",
+    "site_name": "",
+    "operator_access_method": "",
+    "operator_contact": ""
+  },
+  "smtp": {
+    "reported_ready": true,
+    "provider": "",
+    "sender_email": "",
+    "smtp_host": "",
+    "smtp_port": 587,
+    "tls_mode": "starttls",
+    "secret_reference": "External secret manager; do not put passwords in this file"
+  },
+  "uyumsoft": {
+    "product_determined": true,
+    "product_name": "",
+    "version": "",
+    "api_document_location": "",
+    "sandbox_endpoint": "",
+    "access_approved": false,
+    "secret_reference": "External secret manager; do not put API credentials in this file"
+  }
+}

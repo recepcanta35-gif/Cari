@@ -229,5 +229,11 @@
     "baseline_regressions": 13,
     "delivery_regressions": 18,
     "production_acceptance": false
+  },
+  "user_input_status": {
+    "legal_company": "will_be_supplied_later",
+    "production_server_and_domain": "existing_reported_not_connected_or_verified",
+    "smtp": "ready_reported_not_configured_or_verified",
+    "uyumsoft": "product_determined_api_access_pending_name_version_still_required"
   }
 }

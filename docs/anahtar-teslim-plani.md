@@ -98,3 +98,13 @@ Kaynak `071ca93254daf2c6dd82fd89bfce74ae93a2771c` için [MariaDB CI 37937955043]
 Kapsamlı iş merkezi, sevkiyat/servis ve müşteri portalı ekranları kaynakta eklendi. Ancak tam tarayıcı/mobil/yük/güvenlik, serialized/partili ürünler, eşzamanlı yarış ve bütün iade/kur/kısmi sevk varyasyonlarının son kabulü henüz yapılmadı. **Faz/modül final_acceptance alanları bu yüzden false kalır.**
 
 Önemli düzeltmeler: controller re-export'ları lint ile silinmemeli; şema–sınıf testi eklendi. ERPNext v15 stok zaman tie-breaker'ı her iki DB'de düzeltilmiştir. Frappe paylaşım OR koşulu Cari kapsamını aşamasın diye dış AND koruması request/job ve CLI test girişinde uygulanır. Submit sonrası durum değişiklikleri yalnız sunucu işlem uçlarına bırakılır.
+
+
+## Kullanıcının dış bağımlılık durum yanıtı
+
+- Şirket/muhasebe bilgileri sonra sağlanacak.
+- Mevcut üretim sunucusu ve alan adı var; henüz erişim/DNS/TLS bağlantısı doğrulanmadı.
+- E-posta altyapısı hazır; sağlayıcı/gönderen/TLS ve güvenli erişim bilgisiyle gerçek gönderim kabulü bekleniyor.
+- Uyumsoft ürünü belirlenmiş, API/erişim bekleniyor; ürün/sürüm adı ve belge konumu henüz verilmedi.
+
+Sır içermeyen hazırlık şablonu: `deploy/production-inputs.example.json`. Bildirilen mevcudiyet test/aktivasyon onayı yerine geçmez. Geliştirme fazları için ek onay istenmez; yalnız bu gerçek girdiler güvenli yöntemle tamamlanır.
