@@ -1,0 +1,46 @@
+{
+  "legal_company": {
+    "status": "later",
+    "name": "",
+    "tax_id": "",
+    "tax_office": "",
+    "address": "",
+    "accounting_approver": ""
+  },
+  "production": {
+    "reported_existing": true,
+    "domain": "nexterp.skysoftteknoloji.com.tr",
+    "site_name": "nexterp.skysoftteknoloji.com.tr",
+    "operator_access_method": "",
+    "operator_contact": "",
+    "website_domain": "skysoftteknoloji.com.tr",
+    "hosting_provider": "Hostinger",
+    "observed_access": "FTP and active SSH; PHP/MySQL cloud hosting",
+    "deployment_target": "php_cloud",
+    "root_or_sudo_ssh_verified": false,
+    "existing_website_must_be_preserved": true,
+    "user_confirmed_not_vps": true,
+    "domain_reported_created": true,
+    "domain_dns_verified": false,
+    "tls_verified": false,
+    "webroot_relative": "public_html/nexterp"
+  },
+  "smtp": {
+    "reported_ready": true,
+    "provider": "",
+    "sender_email": "",
+    "smtp_host": "",
+    "smtp_port": 587,
+    "tls_mode": "starttls",
+    "secret_reference": "External secret manager; do not put passwords in this file"
+  },
+  "uyumsoft": {
+    "product_determined": true,
+    "product_name": "",
+    "version": "",
+    "api_document_location": "",
+    "sandbox_endpoint": "",
+    "access_approved": false,
+    "secret_reference": "External secret manager; do not put API credentials in this file"
+  }
+}

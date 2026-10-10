@@ -1,0 +1,30 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Scope Customer",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "creation": "2026-10-09 12:00:00.000000",
+ "modified": "2026-10-09 12:00:00.000000",
+ "modified_by": "Administrator",
+ "owner": "Administrator",
+ "fields": [
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Müşteri",
+   "reqd": 1,
+   "options": "Customer"
+  }
+ ],
+ "field_order": [
+  "customer"
+ ],
+ "track_changes": 1,
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "permissions": [],
+ "links": [],
+ "actions": [],
+ "states": [],
+ "istable": 1
+}

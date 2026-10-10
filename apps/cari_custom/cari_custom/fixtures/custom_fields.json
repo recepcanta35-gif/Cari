@@ -1,0 +1,20 @@
+[
+ {
+  "doctype": "Custom Field",
+  "name": "Delivery Note-kargo_firma",
+  "dt": "Delivery Note",
+  "fieldname": "kargo_firma",
+  "fieldtype": "Data",
+  "label": "Kargo Firması",
+  "insert_after": "transporter"
+ },
+ {
+  "doctype": "Custom Field",
+  "name": "Delivery Note-kargo_takip_no",
+  "dt": "Delivery Note",
+  "fieldname": "kargo_takip_no",
+  "fieldtype": "Data",
+  "label": "Kargo Takip No",
+  "insert_after": "kargo_firma"
+ }
+]

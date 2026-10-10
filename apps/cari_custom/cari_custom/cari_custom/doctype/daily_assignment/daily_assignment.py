@@ -1,0 +1,1 @@
+from cari_custom.field_operations import DailyAssignment as DailyAssignment

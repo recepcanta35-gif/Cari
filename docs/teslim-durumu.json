@@ -1,0 +1,316 @@
+{
+  "version": 1,
+  "updated_on": "2026-10-10",
+  "branch": "arena/c5b59147-cari",
+  "development_approval": "all_phases",
+  "production_ready": false,
+  "decision": "NO-GO",
+  "previous_demo_evidence": "docs/faz-1-5-test-sonuclari.md",
+  "current_ci_required": true,
+  "phases": [
+    {
+      "id": "T0",
+      "status": "in_progress"
+    },
+    {
+      "id": "T1",
+      "status": "in_progress"
+    },
+    {
+      "id": "T2",
+      "status": "in_progress"
+    },
+    {
+      "id": "T3",
+      "status": "in_progress"
+    },
+    {
+      "id": "T4",
+      "status": "in_progress"
+    },
+    {
+      "id": "T5",
+      "status": "in_progress"
+    },
+    {
+      "id": "T6",
+      "status": "in_progress"
+    },
+    {
+      "id": "T7",
+      "status": "in_progress"
+    },
+    {
+      "id": "T8",
+      "status": "planned"
+    },
+    {
+      "id": "T9",
+      "status": "planned"
+    }
+  ],
+  "modules": [
+    {
+      "id": "M01",
+      "name": "Dashboard",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M02",
+      "name": "Ürünler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M03",
+      "name": "Depolar ve stok",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M04",
+      "name": "Personel stok tahsisi",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M05",
+      "name": "Satış ve sipariş",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M06",
+      "name": "Satın alma",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M07",
+      "name": "Müşteri ve cari",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M08",
+      "name": "Tahsilat ve çek/senet",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M09",
+      "name": "Teklifler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M10",
+      "name": "Araç ve görev",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M11",
+      "name": "Sevkiyat ve kargo",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M12",
+      "name": "İadeler",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M13",
+      "name": "Garanti ve servis",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M14",
+      "name": "Raporlar",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M15",
+      "name": "E-posta",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M16",
+      "name": "Kullanıcı ve yetki",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M17",
+      "name": "Uyumsoft",
+      "status": "blocked_provider_contract",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    },
+    {
+      "id": "M18",
+      "name": "Online satış ve portal",
+      "status": "implementation_verification",
+      "final_acceptance": false,
+      "acceptance_source": "docs/anahtar-teslim-plani.md"
+    }
+  ],
+  "external_dependencies": [
+    {
+      "id": "legal_company_and_tax",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "accounting_signoff",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "production_server_and_dns",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "smtp_and_sender",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "uyumsoft_product_version_contract_access",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "portal_payment_decision",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "backup_restore_drill",
+      "status": "awaiting_real_input",
+      "required": true
+    },
+    {
+      "id": "user_acceptance_signoff",
+      "status": "awaiting_real_input",
+      "required": true
+    }
+  ],
+  "current_evidence": {
+    "source_commit": "614416291e1ae27dd79fd9fdab408ed2714b722e",
+    "ci_run": 37982049980,
+    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37982049980",
+    "ci_conclusion": "success",
+    "pr_ci_run": 37982054831,
+    "unit_tests": 38,
+    "demo_acceptance_checks": 201,
+    "baseline_regressions": 13,
+    "delivery_regressions": 18,
+    "production_acceptance": false,
+    "local_pure_test_rerun_on": "2026-10-10",
+    "local_pure_tests_conclusion": "38_passed",
+    "local_ruff_conclusion": "passed",
+    "full_local_bench_rerun_this_report": false
+  },
+  "user_input_status": {
+    "legal_company": "will_be_supplied_later",
+    "production_server_and_domain": "confirmed_hostinger_cloud_php_mysql_with_ssh_not_vps_runtime_unavailable_or_unverified",
+    "smtp": "ready_reported_not_configured_or_verified",
+    "uyumsoft": "product_determined_api_access_pending_name_version_still_required"
+  },
+  "hosting_evidence": {
+    "provider": "Hostinger",
+    "observed": "Hostinger cloud PHP/MySQL hosting with FTP and active SSH",
+    "website_domain": "skysoftteknoloji.com.tr",
+    "proposed_upload_folder": "public_html/nexterp",
+    "ssh_root_or_sudo_verified": false,
+    "docker_runtime_verified": false,
+    "connection_attempted": true,
+    "files_uploaded": false,
+    "existing_website_must_be_preserved": true,
+    "credentials_recorded": false,
+    "decision": "NOT_A_DEPLOYABLE_TARGET_FOR_CURRENT_DOCKER_PACKAGE",
+    "user_confirmed_not_vps": true,
+    "ssh_account_available": true,
+    "ssh_port": 65002,
+    "runtime_capabilities_tested": false,
+    "deployment_blocker": "Chosen ERPNext stack needs supported Python/Frappe, Redis and persistent services; PHP/MySQL/SSH evidence alone is insufficient",
+    "erp_subdomain": "nexterp.skysoftteknoloji.com.tr",
+    "subdomain_created_reported_by_user": true,
+    "dns_verified": false,
+    "tls_verified": false,
+    "folder_observation": "public_html/nexterp containing default.php",
+    "database_observation": "MySQL database/user creation form shown; successful creation not confirmed by screenshot",
+    "phpmyadmin_url_received": true,
+    "authenticated": false,
+    "database_changed": false,
+    "connection_blocker": "TCP connections close before SSH/FTP greeting; HTTP disconnects; phpMyAdmin TLS ends with EOF. Cause not established by these checks.",
+    "attempt_type": "read_only_transport_and_protocol_greeting_checks",
+    "passwords_transmitted": false,
+    "transport_check": {
+      "ssh_65002": "TCP accepted; closed without SSH banner",
+      "ftp_21": "TCP accepted; closed without FTP greeting",
+      "erp_http": "RemoteDisconnected: closed without HTTP response",
+      "phpmyadmin_https": "TLS/SSL EOF before HTTP response"
+    }
+  },
+  "architecture_proposal": {
+    "status": "proposed_not_applied",
+    "reason": "user asks about existing PHP/MySQL cloud compatibility",
+    "current_stack": "Frappe ERPNext v15",
+    "candidate_stack": "supported PHP ERP core with custom modules (Dolibarr to evaluate first)",
+    "alternative": "custom PHP framework only if no-from-scratch decision is revised",
+    "scope_preserved": "18 modules; no barcode or SMS",
+    "review_document": "docs/php-hosting-uyum-plani.md",
+    "new_php_acceptance_complete": false,
+    "current_decision": "deferred_by_user_local_python_choice",
+    "migration_applied": false
+  },
+  "previous_ci_evidence": {
+    "source_commit": "071ca93254daf2c6dd82fd89bfce74ae93a2771c",
+    "ci_run": 37937955043,
+    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043",
+    "ci_conclusion": "success",
+    "unit_tests": 37,
+    "demo_acceptance_checks": 201,
+    "baseline_regressions": 13,
+    "delivery_regressions": 18,
+    "production_acceptance": false
+  },
+  "local_development": {
+    "user_decision": "continue_python_frappe_erpnext_locally",
+    "decided_on": "2026-10-10",
+    "php_replatform": "not_applied_deferred",
+    "source_branch": "arena/c5b59147-cari",
+    "recommended_full_runtime": "Linux or WSL2; Frappe/ERPNext v15.122.0; MariaDB; Redis; separate bench",
+    "setup_guide": "docs/devir/local-python-kurulum.md",
+    "handover_report": "docs/devir/operasyon-ve-kapsam-raporu.md",
+    "old_demo_runtime_present": false,
+    "old_demo_db_backup_in_source": false,
+    "source_transfer_includes_secrets": false,
+    "production_gate_unchanged": "NO-GO"
+  }
+}

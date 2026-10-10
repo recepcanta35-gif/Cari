@@ -1,0 +1,122 @@
+x-app: &app
+  image: ${CARI_IMAGE:?Build and set CARI_IMAGE}
+  restart: unless-stopped
+  volumes:
+    - sites:/home/frappe/frappe-bench/sites
+    - logs:/home/frappe/frappe-bench/logs
+  depends_on:
+    configurator:
+      condition: service_completed_successfully
+  networks: [private, egress]
+
+services:
+  db:
+    image: mariadb:${MARIADB_VERSION:-10.6}
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:?Set a strong database root secret}
+    volumes:
+      - db:/var/lib/mysql
+      - ./mariadb.cnf:/etc/mysql/conf.d/cari.cnf:ro
+    networks: [private]
+    healthcheck:
+      test: [CMD, healthcheck.sh, --connect, --innodb_initialized]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+  redis-cache:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    networks: [private]
+  redis-queue:
+    image: redis:7.2-alpine
+    restart: unless-stopped
+    command: [redis-server, --appendonly, 'yes']
+    volumes: [redis:/data]
+    networks: [private]
+  configurator:
+    image: ${CARI_IMAGE:?Build and set CARI_IMAGE}
+    restart: 'no'
+    entrypoint: [bash, -ec]
+    command:
+      - |
+        ls -1 apps > sites/apps.txt
+        bench set-config -g db_host db
+        bench set-config -gp db_port 3306
+        bench set-config -g redis_cache redis://redis-cache:6379
+        bench set-config -g redis_queue redis://redis-queue:6379
+        bench set-config -g redis_socketio redis://redis-queue:6379
+        bench set-config -gp socketio_port 9000
+        bench set-config -g developer_mode 0
+    volumes: [sites:/home/frappe/frappe-bench/sites]
+    depends_on:
+      db:
+        condition: service_healthy
+      redis-cache:
+        condition: service_started
+      redis-queue:
+        condition: service_started
+    networks: [private]
+  backend:
+    <<: *app
+    healthcheck:
+      test: [CMD-SHELL, 'curl -fsS -H "Host: $$CARI_SITE" http://127.0.0.1:8000/api/method/ping >/dev/null']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    environment:
+      CARI_SITE: ${CARI_SITE:?Set production site name}
+  websocket:
+    <<: *app
+    command: [node, /home/frappe/frappe-bench/apps/frappe/socketio.js]
+  queue-short:
+    <<: *app
+    command: [bench, worker, --queue, short,default]
+  queue-long:
+    <<: *app
+    command: [bench, worker, --queue, long,default]
+  scheduler:
+    <<: *app
+    command: [bench, schedule]
+  frontend:
+    <<: *app
+    command: [nginx-entrypoint.sh]
+    environment:
+      BACKEND: backend:8000
+      SOCKETIO: websocket:9000
+      NGINX_LISTEN_PORT: '8080'
+      FRAPPE_SITE_NAME_HEADER: ${CARI_SITE:?Set production site name}
+      UPSTREAM_REAL_IP_ADDRESS: caddy
+      UPSTREAM_REAL_IP_HEADER: X-Forwarded-For
+      UPSTREAM_REAL_IP_RECURSIVE: 'on'
+    depends_on:
+      backend:
+        condition: service_started
+      websocket:
+        condition: service_started
+  caddy:
+    image: caddy:2-alpine
+    restart: unless-stopped
+    environment:
+      CARI_DOMAIN: ${CARI_DOMAIN:?Set real DNS name}
+      ACME_EMAIL: ${ACME_EMAIL:?Set certificate contact}
+    ports: ['80:80', '443:443']
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [private, edge]
+    depends_on: [frontend]
+
+networks:
+  private:
+    internal: true
+  edge: {}
+  egress: {}
+volumes:
+  db: {}
+  sites: {}
+  logs: {}
+  redis: {}
+  caddy-data: {}
+  caddy-config: {}

@@ -1,0 +1,169 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Payment Instrument",
+ "module": "Cari Custom",
+ "engine": "InnoDB",
+ "autoname": "hash",
+ "is_submittable": 1,
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "reqd": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "customer",
+   "fieldtype": "Link",
+   "label": "Müşteri",
+   "reqd": 1,
+   "options": "Customer"
+  },
+  {
+   "fieldname": "instrument_type",
+   "fieldtype": "Select",
+   "label": "Evrak Türü",
+   "reqd": 1,
+   "options": "Çek\nSenet"
+  },
+  {
+   "fieldname": "instrument_number",
+   "fieldtype": "Data",
+   "label": "Evrak Numarası",
+   "reqd": 1
+  },
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Bağlı Fatura",
+   "reqd": 0,
+   "options": "Sales Invoice"
+  },
+  {
+   "fieldname": "amount",
+   "fieldtype": "Currency",
+   "label": "Evrak Tutarı",
+   "reqd": 1
+  },
+  {
+   "fieldname": "currency",
+   "fieldtype": "Link",
+   "label": "Para Birimi",
+   "reqd": 1,
+   "options": "Currency"
+  },
+  {
+   "fieldname": "due_date",
+   "fieldtype": "Date",
+   "label": "Vade Tarihi",
+   "reqd": 1
+  },
+  {
+   "fieldname": "received_date",
+   "fieldtype": "Date",
+   "label": "Alınma Tarihi",
+   "default": "Today",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Durum",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "default": "Alındı",
+   "options": "Alındı\nBankada\nTahsil Edildi\nKarşılıksız\nİade Edildi\nİptal"
+  },
+  {
+   "fieldname": "payment_entry",
+   "fieldtype": "Link",
+   "label": "Gerçek Tahsilat Kaydı",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "options": "Payment Entry"
+  },
+  {
+   "fieldname": "bank_account",
+   "fieldtype": "Link",
+   "label": "Banka Muhasebe Hesabı",
+   "read_only": 1,
+   "allow_on_submit": 1,
+   "options": "Account"
+  },
+  {
+   "fieldname": "collection_date",
+   "fieldtype": "Date",
+   "label": "Tahsil Tarihi",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "reason",
+   "fieldtype": "Small Text",
+   "label": "Açıklama",
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "references",
+   "fieldtype": "Table",
+   "label": "Fatura Tahsisleri",
+   "options": "Cari Instrument Reference"
+  }
+ ],
+ "field_order": [
+  "company",
+  "customer",
+  "instrument_type",
+  "instrument_number",
+  "invoice",
+  "amount",
+  "currency",
+  "due_date",
+  "received_date",
+  "status",
+  "payment_entry",
+  "bank_account",
+  "collection_date",
+  "reason",
+  "references"
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Muhasebe",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Yönetici",
+   "read": 1,
+   "create": 1,
+   "write": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "links": [],
+ "actions": [],
+ "states": []
+}

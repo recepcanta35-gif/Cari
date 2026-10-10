@@ -1,0 +1,199 @@
+{
+ "actions": [],
+ "creation": "2026-10-09 08:00:00.000000",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "naming_series",
+  "personel",
+  "depo",
+  "urun",
+  "zimmet_miktar",
+  "birim",
+  "atama_tarihi",
+  "iade_tarihi",
+  "durum",
+  "aciklama",
+  "stok_hareketi",
+  "company",
+  "kaynak_depo",
+  "serial_no",
+  "batch_no",
+  "iade_miktar",
+  "satilan_miktar",
+  "kalan_miktar"
+ ],
+ "fields": [
+  {
+   "fieldname": "naming_series",
+   "fieldtype": "Select",
+   "label": "Seri",
+   "options": "SA-.#####",
+   "default": "SA-.#####"
+  },
+  {
+   "fieldname": "personel",
+   "fieldtype": "Link",
+   "label": "Personel",
+   "options": "Employee",
+   "reqd": 1
+  },
+  {
+   "fieldname": "depo",
+   "fieldtype": "Link",
+   "label": "Depo",
+   "options": "Warehouse",
+   "reqd": 1
+  },
+  {
+   "fieldname": "urun",
+   "fieldtype": "Link",
+   "label": "Ürün",
+   "options": "Item",
+   "reqd": 1
+  },
+  {
+   "fieldname": "zimmet_miktar",
+   "fieldtype": "Float",
+   "label": "Zimmet Miktarı",
+   "reqd": 1
+  },
+  {
+   "fieldname": "birim",
+   "fieldtype": "Link",
+   "label": "Birim",
+   "options": "UOM"
+  },
+  {
+   "fieldname": "atama_tarihi",
+   "fieldtype": "Date",
+   "label": "Atama Tarihi",
+   "default": "Today"
+  },
+  {
+   "fieldname": "iade_tarihi",
+   "fieldtype": "Date",
+   "label": "İade Tarihi"
+  },
+  {
+   "fieldname": "durum",
+   "fieldtype": "Select",
+   "label": "Durum",
+   "options": "Aktif\nKısmi İade\nİade Edildi\nTükendi\nİptal",
+   "default": "Aktif",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "aciklama",
+   "fieldtype": "Text",
+   "label": "Açıklama"
+  },
+  {
+   "fieldname": "stok_hareketi",
+   "fieldtype": "Link",
+   "label": "Stok Transferi",
+   "options": "Stock Entry",
+   "read_only": 1,
+   "description": "Onayda oluşan gerçek stok transferi; aynı transfer ikinci zimmete bağlanamaz.",
+   "unique": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "company",
+   "fieldtype": "Link",
+   "label": "Şirket",
+   "read_only": 1,
+   "options": "Company"
+  },
+  {
+   "fieldname": "kaynak_depo",
+   "fieldtype": "Link",
+   "label": "Kaynak Depo",
+   "options": "Warehouse"
+  },
+  {
+   "fieldname": "serial_no",
+   "fieldtype": "Small Text",
+   "label": "Seri Numaraları"
+  },
+  {
+   "fieldname": "batch_no",
+   "fieldtype": "Link",
+   "label": "Parti",
+   "options": "Batch"
+  },
+  {
+   "fieldname": "iade_miktar",
+   "fieldtype": "Float",
+   "label": "İade Edilen",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "satilan_miktar",
+   "fieldtype": "Float",
+   "label": "Net Satılan",
+   "read_only": 1,
+   "allow_on_submit": 1
+  },
+  {
+   "fieldname": "kalan_miktar",
+   "fieldtype": "Float",
+   "label": "Kalan Zimmet",
+   "read_only": 1,
+   "allow_on_submit": 1
+  }
+ ],
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-10-09 08:00:00.000000",
+ "modified_by": "Administrator",
+ "module": "Cari Custom",
+ "name": "Stock Assignment",
+ "naming_rule": "By \"Naming Series\" field",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Cari Yönetici",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Depo Personeli",
+   "read": 1,
+   "write": 1,
+   "create": 1,
+   "submit": 1,
+   "cancel": 1,
+   "amend": 1,
+   "print": 1
+  },
+  {
+   "role": "Saha Personeli",
+   "read": 1,
+   "print": 1
+  }
+ ],
+ "sort_field": "modified",
+ "sort_order": "DESC",
+ "states": [],
+ "autoname": "naming_series:",
+ "track_changes": 1,
+ "is_submittable": 1
+}

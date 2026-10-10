@@ -1,0 +1,28 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Instrument Reference",
+ "module": "Cari Custom",
+ "istable": 1,
+ "fields": [
+  {
+   "fieldname": "invoice",
+   "fieldtype": "Link",
+   "label": "Fatura",
+   "options": "Sales Invoice",
+   "reqd": 1
+  },
+  {
+   "fieldname": "allocated_amount",
+   "fieldtype": "Currency",
+   "label": "Tahsisi Tutarı",
+   "reqd": 1
+  }
+ ],
+ "field_order": [
+  "invoice",
+  "allocated_amount"
+ ],
+ "permissions": [],
+ "links": [],
+ "actions": []
+}

@@ -1,0 +1,62 @@
+{
+ "doctype": "DocType",
+ "name": "Cari Reminder Log",
+ "module": "Cari Custom",
+ "autoname": "field:key",
+ "track_changes": 1,
+ "fields": [
+  {
+   "fieldname": "key",
+   "fieldtype": "Data",
+   "label": "Tekilleştirme Anahtarı",
+   "unique": 1,
+   "reqd": 1
+  },
+  {
+   "fieldname": "recipient",
+   "fieldtype": "Link",
+   "options": "User",
+   "label": "Alıcı",
+   "reqd": 1
+  },
+  {
+   "fieldname": "reference_doctype",
+   "fieldtype": "Link",
+   "options": "DocType",
+   "label": "Belge Türü"
+  },
+  {
+   "fieldname": "reference_name",
+   "fieldtype": "Dynamic Link",
+   "options": "reference_doctype",
+   "label": "Belge"
+  },
+  {
+   "fieldname": "notification_type",
+   "fieldtype": "Data",
+   "label": "Bildirim Türü"
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "options": "Kuyrukta\nEngellendi\nHata",
+   "label": "Durum"
+  }
+ ],
+ "field_order": [
+  "key",
+  "recipient",
+  "reference_doctype",
+  "reference_name",
+  "notification_type",
+  "status"
+ ],
+ "permissions": [
+  {
+   "role": "System Manager",
+   "read": 1
+  }
+ ],
+ "links": [],
+ "actions": []
+}
