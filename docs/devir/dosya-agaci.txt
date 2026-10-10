@@ -1,0 +1,191 @@
+Cari — Tam Teslim Kaynak Dosya Ağacı
+Tarih: 10 Ekim 2026 | Dal: arena/c5b59147-cari
+Kod referansı: 614416291e1ae27dd79fd9fdab408ed2714b722e
+Toplam: 135 dosya (devir belgeleri dahil); incelenen eski kaynak: 129.
+Liste: Git dosyaları + bu teslimin 6 devir belgesi. .git/env/vendor/DB/secrets/artifacts hariç.
+Kaynak ZIP kökü Cari/. Offline Git bundle ayrı dosya; kaynak dizininin parçası değil.
+
+Cari/
+├── .github/
+│   └── workflows/
+│       └── cari-ci.yml
+├── apps/
+│   ├── cari_custom/
+│   │   ├── cari_custom/
+│   │   │   ├── cari_custom/
+│   │   │   │   ├── doctype/
+│   │   │   │   │   ├── cari_instrument_reference/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_instrument_reference.json
+│   │   │   │   │   │   └── cari_instrument_reference.py
+│   │   │   │   │   ├── cari_payment_instrument/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_payment_instrument.json
+│   │   │   │   │   │   └── cari_payment_instrument.py
+│   │   │   │   │   ├── cari_reminder_log/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_reminder_log.json
+│   │   │   │   │   │   └── cari_reminder_log.py
+│   │   │   │   │   ├── cari_scope_customer/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_scope_customer.json
+│   │   │   │   │   │   └── cari_scope_customer.py
+│   │   │   │   │   ├── cari_scope_warehouse/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_scope_warehouse.json
+│   │   │   │   │   │   └── cari_scope_warehouse.py
+│   │   │   │   │   ├── cari_security_event/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_security_event.json
+│   │   │   │   │   │   └── cari_security_event.py
+│   │   │   │   │   ├── cari_service_record/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_service_record.json
+│   │   │   │   │   │   └── cari_service_record.py
+│   │   │   │   │   ├── cari_settings/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_settings.json
+│   │   │   │   │   │   └── cari_settings.py
+│   │   │   │   │   ├── cari_shipment/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_shipment.json
+│   │   │   │   │   │   └── cari_shipment.py
+│   │   │   │   │   ├── cari_user_scope/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── cari_user_scope.json
+│   │   │   │   │   │   └── cari_user_scope.py
+│   │   │   │   │   ├── daily_assignment/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── daily_assignment.json
+│   │   │   │   │   │   └── daily_assignment.py
+│   │   │   │   │   ├── stock_assignment/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── stock_assignment.json
+│   │   │   │   │   │   └── stock_assignment.py
+│   │   │   │   │   ├── stock_assignment_return/
+│   │   │   │   │   │   ├── __init__.py
+│   │   │   │   │   │   ├── stock_assignment_return.json
+│   │   │   │   │   │   └── stock_assignment_return.py
+│   │   │   │   │   └── __init__.py
+│   │   │   │   ├── page/
+│   │   │   │   │   └── cari_merkez/
+│   │   │   │   │       ├── __init__.py
+│   │   │   │   │       ├── cari_merkez.js
+│   │   │   │   │       └── cari_merkez.json
+│   │   │   │   └── __init__.py
+│   │   │   ├── fixtures/
+│   │   │   │   └── custom_fields.json
+│   │   │   ├── public/
+│   │   │   │   └── js/
+│   │   │   │       ├── operations.js
+│   │   │   │       └── portal.js
+│   │   │   ├── tests/
+│   │   │   │   ├── __init__.py
+│   │   │   │   ├── test_business.py
+│   │   │   │   ├── test_delivery.py
+│   │   │   │   └── test_faz15.py
+│   │   │   ├── www/
+│   │   │   │   ├── cari-portal.html
+│   │   │   │   └── cari-portal.py
+│   │   │   ├── __init__.py
+│   │   │   ├── api.py
+│   │   │   ├── bootstrap.py
+│   │   │   ├── business_operations.py
+│   │   │   ├── compat_patches.py
+│   │   │   ├── delivery.py
+│   │   │   ├── field_operations.py
+│   │   │   ├── hooks.py
+│   │   │   ├── modules.txt
+│   │   │   ├── notifications.py
+│   │   │   ├── patches.txt
+│   │   │   ├── permission_queries.py
+│   │   │   ├── portal.py
+│   │   │   ├── postgres_queries.py
+│   │   │   ├── rules.py
+│   │   │   ├── sample_data.py
+│   │   │   ├── sample_validation.py
+│   │   │   ├── security.py
+│   │   │   ├── setup_turkey.py
+│   │   │   └── user_management.py
+│   │   ├── README.md
+│   │   ├── license.txt
+│   │   └── pyproject.toml
+│   └── uyumsoft_integration/
+│       ├── uyumsoft_integration/
+│       │   ├── uyumsoft/
+│       │   │   ├── __init__.py
+│       │   │   ├── connector.py
+│       │   │   ├── sync.py
+│       │   │   └── ubltr.py
+│       │   ├── uyumsoft_integration/
+│       │   │   ├── doctype/
+│       │   │   │   ├── uyumsoft_settings/
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── uyumsoft_settings.json
+│       │   │   │   │   └── uyumsoft_settings.py
+│       │   │   │   ├── uyumsoft_transfer_log/
+│       │   │   │   │   ├── __init__.py
+│       │   │   │   │   ├── uyumsoft_transfer_log.json
+│       │   │   │   │   └── uyumsoft_transfer_log.py
+│       │   │   │   └── __init__.py
+│       │   │   └── __init__.py
+│       │   ├── __init__.py
+│       │   ├── hooks.py
+│       │   ├── modules.txt
+│       │   └── patches.txt
+│       ├── README.md
+│       ├── license.txt
+│       └── pyproject.toml
+├── deploy/
+│   ├── .env.example
+│   ├── Caddyfile
+│   ├── Dockerfile
+│   ├── backup.sh
+│   ├── compose.yml
+│   ├── create-site.sh
+│   ├── mariadb.cnf
+│   ├── production-inputs.example.json
+│   └── runtime-probe.sh
+├── docs/
+│   ├── devir/
+│   │   ├── degisen-dosyalar.tsv
+│   │   ├── dosya-agaci.txt
+│   │   ├── dosya-envanteri.tsv
+│   │   ├── git-commit-dokumu.md
+│   │   ├── local-python-kurulum.md
+│   │   └── operasyon-ve-kapsam-raporu.md
+│   ├── anahtar-teslim-plani.md
+│   ├── cozum-secenekleri-karsilastirmasi.md
+│   ├── erpnext-hazir-cozum-degerlendirmesi.md
+│   ├── erpnext-kapsam-mimari-kurumsal-uygunluk.md
+│   ├── erpnext-kurulum-rehberi.md
+│   ├── faz-1-5-test-sonuclari.md
+│   ├── hosting-uygunluk-kontrolu.md
+│   ├── kapsam-analizi.md
+│   ├── lisans-envanteri.md
+│   ├── php-hosting-uyum-plani.md
+│   ├── teslim-durumu.json
+│   └── uretim-isletim-kilavuzu.md
+├── scripts/
+│   ├── ci_annotation.py
+│   ├── deployment_preflight.py
+│   ├── run_delivery_tests.py
+│   └── run_faz15_tests.py
+├── tests/
+│   ├── unit/
+│   │   ├── test_deployment.py
+│   │   ├── test_rules.py
+│   │   └── test_schema.py
+│   └── conftest.py
+├── .dockerignore
+├── .gitignore
+├── README.md
+└── pytest.ini
+
+Kök grupları: .dockerignore=1, .github=1, .gitignore=1, README.md=1, apps=95, deploy=9, docs=18, pytest.ini=1, scripts=4, tests=4
+
+YEREL RUNTIME (bu ağaçta/arşivde YOK):
+~/projects/Cari/ = bu kaynak; ~/cari-bench/ = ayrıca kurulan Frappe/ERPNext/env/sites/logs.
+Dosyaların görevi/simgeleri: docs/devir/dosya-envanteri.tsv
+Git diff dökümü 6144162 sınırında: docs/devir/degisen-dosyalar.tsv
+Full local komutlar: docs/devir/local-python-kurulum.md

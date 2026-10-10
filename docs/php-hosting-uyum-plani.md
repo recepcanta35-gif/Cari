@@ -1,5 +1,7 @@
 # PHP/MySQL Cloud Hosting Uyum Seçeneği
 
+> **10 Ekim 2026 güncellemesi:** Kullanıcı şimdilik local Python/Frappe/ERPNext ile devam etmeyi seçti. Bu belge tarihî, uygulanmamış PHP alternatifidir; replatform yapılmadı. Güncel devir: [local kurulum](devir/local-python-kurulum.md), [operasyon raporu](devir/operasyon-ve-kapsam-raporu.md).
+
 **Tarih:** 9 Ekim 2026
 **Durum:** Mimari değişiklik önerisi; ERPNext kararı henüz değiştirilmedi, PHP uygulaması kurulmadı.
 

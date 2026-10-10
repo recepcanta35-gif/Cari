@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updated_on": "2026-10-09",
+  "updated_on": "2026-10-10",
   "branch": "arena/c5b59147-cari",
   "development_approval": "all_phases",
   "production_ready": false,
@@ -220,15 +220,20 @@
     }
   ],
   "current_evidence": {
-    "source_commit": "071ca93254daf2c6dd82fd89bfce74ae93a2771c",
-    "ci_run": 37937955043,
-    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043",
+    "source_commit": "614416291e1ae27dd79fd9fdab408ed2714b722e",
+    "ci_run": 37982049980,
+    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37982049980",
     "ci_conclusion": "success",
-    "unit_tests": 37,
+    "pr_ci_run": 37982054831,
+    "unit_tests": 38,
     "demo_acceptance_checks": 201,
     "baseline_regressions": 13,
     "delivery_regressions": 18,
-    "production_acceptance": false
+    "production_acceptance": false,
+    "local_pure_test_rerun_on": "2026-10-10",
+    "local_pure_tests_conclusion": "38_passed",
+    "local_ruff_conclusion": "passed",
+    "full_local_bench_rerun_this_report": false
   },
   "user_input_status": {
     "legal_company": "will_be_supplied_later",
@@ -280,6 +285,32 @@
     "alternative": "custom PHP framework only if no-from-scratch decision is revised",
     "scope_preserved": "18 modules; no barcode or SMS",
     "review_document": "docs/php-hosting-uyum-plani.md",
-    "new_php_acceptance_complete": false
+    "new_php_acceptance_complete": false,
+    "current_decision": "deferred_by_user_local_python_choice",
+    "migration_applied": false
+  },
+  "previous_ci_evidence": {
+    "source_commit": "071ca93254daf2c6dd82fd89bfce74ae93a2771c",
+    "ci_run": 37937955043,
+    "ci_url": "https://github.com/recepcanta35-gif/Cari/actions/runs/37937955043",
+    "ci_conclusion": "success",
+    "unit_tests": 37,
+    "demo_acceptance_checks": 201,
+    "baseline_regressions": 13,
+    "delivery_regressions": 18,
+    "production_acceptance": false
+  },
+  "local_development": {
+    "user_decision": "continue_python_frappe_erpnext_locally",
+    "decided_on": "2026-10-10",
+    "php_replatform": "not_applied_deferred",
+    "source_branch": "arena/c5b59147-cari",
+    "recommended_full_runtime": "Linux or WSL2; Frappe/ERPNext v15.122.0; MariaDB; Redis; separate bench",
+    "setup_guide": "docs/devir/local-python-kurulum.md",
+    "handover_report": "docs/devir/operasyon-ve-kapsam-raporu.md",
+    "old_demo_runtime_present": false,
+    "old_demo_db_backup_in_source": false,
+    "source_transfer_includes_secrets": false,
+    "production_gate_unchanged": "NO-GO"
   }
 }
